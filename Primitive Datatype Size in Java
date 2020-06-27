@@ -1,0 +1,48 @@
+public class primitiveDatatypeSize {
+    public static void main(String[] args)
+    {
+        //Byte:
+        byte byteMinValue = Byte.MIN_VALUE;
+        byte byteMaxValue = Byte.MAX_VALUE;
+
+        //Short:
+        short shortMinValue = Short.MIN_VALUE;
+        short shortMaxValue = Short.MAX_VALUE;
+
+        //Integer:
+        int integerMinValue = Integer.MIN_VALUE;
+        int integerMaxValue = Integer.MAX_VALUE;
+
+        //Long:
+        long longMinValue = Long.MIN_VALUE;
+        long longMaxValue = Long.MAX_VALUE;
+
+        //Float:
+        float floatMinValue = Float.MIN_VALUE;
+        float floatMaxValue = Float.MAX_VALUE;
+
+        //Double:
+        double doubleMinValue = Double.MIN_VALUE;
+        double doubleMaxValue = Double.MAX_VALUE;
+
+        //Print:
+        System.out.println("Byte Min: "+byteMinValue);
+        System.out.println("Byte Max: "+byteMaxValue);
+
+        System.out.println("Short Min: "+shortMinValue);
+        System.out.println("Short Max: "+shortMaxValue);
+
+        System.out.println("Int Min: "+integerMinValue);
+        System.out.println("Int Max: "+integerMaxValue);
+
+        System.out.println("Long Min: "+longMinValue);
+        System.out.println("Long Max: "+longMaxValue);
+
+        System.out.println("Float Min: "+floatMinValue);
+        System.out.println("Float Max: "+floatMaxValue);
+
+        System.out.println("Double Min: "+doubleMinValue);
+        System.out.println("Double Max: "+doubleMaxValue);
+
+    }
+}
