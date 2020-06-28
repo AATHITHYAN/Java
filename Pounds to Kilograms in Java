@@ -1,0 +1,14 @@
+package learning;
+
+public class poundToKilogram
+{
+    public static void main(String[] args)
+    {
+        double poundValue = 200d;
+        double kiloValue;
+
+        kiloValue = poundValue * 0.45359237d;
+
+        System.out.println(kiloValue);
+    }
+}
