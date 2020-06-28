@@ -1,0 +1,26 @@
+package learning;
+
+public class typeCasting {
+    public static void main(String[] args)
+    {
+        //Type Casting:
+
+        //1. Implicit TypeCasting:
+
+        byte num1 = 2;
+        byte num2 = 3;
+
+        int implicit = num1 + num2;
+
+        System.out.println(implicit);
+
+        //2. Explicit TypeCasting:
+
+        int number1 = 2;
+        int number2 = 3;
+
+        byte explicit = (byte) (num1 + num2);
+
+        System.out.println(implicit);
+    }
+}
