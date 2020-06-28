@@ -1,0 +1,26 @@
+package learning;
+
+public class dataTypes
+{
+    public static void main(String[] args) {
+        byte num1 = 1;
+        short num2 = 2;
+        int num3 = 3;
+        long num4 = 4L;
+        float num5 = 5.5f;
+        double num6 = 6.1245d;
+        char char1 = 'A';
+        char char2 = '\u0044';
+        boolean bool1 = true;
+
+        System.out.println("Byte: " + num1);
+        System.out.println("Short: " + num2);
+        System.out.println("Integer: " + num3);
+        System.out.println("Long: " + num4);
+        System.out.println("Float: "+ num5);
+        System.out.println("Double: " + num6);
+        System.out.println("Char: " + char1);
+        System.out.println("Char Unicode: " + char2);
+        System.out.println("Boolean: " + bool1);
+    }
+}
