@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class isPostiveOrNot {
+
+	public static void main(String[] args) 
+	{
+		int num;
+		Scanner sc= new Scanner(System.in);
+		
+		num = sc.nextInt();
+		
+		if(num > 0)
+			System.out.println(num + " It is Postive Number ");
+		else if(num < 0)
+			System.out.println(num + " It is Negative Number");
+		else
+			System.out.println(num + " It is Zero");
+		
+		sc.close();
+	}
+
+}
