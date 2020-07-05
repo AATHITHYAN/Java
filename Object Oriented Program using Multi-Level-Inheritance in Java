@@ -1,0 +1,290 @@
+package fullStackJavaDevelopment;
+
+class Grandfather
+{
+	private String grandFatherName;
+	private int grandFatherAge;
+	private String grandFatherGeneration;
+	private String grandFatherJob;
+
+	public Grandfather(String grandFatherName, int grandFatherAge, String grandFatherGeneration,
+			String grandFatherJob) {
+		super();
+		this.grandFatherName = grandFatherName;
+		this.grandFatherAge = grandFatherAge;
+		this.grandFatherGeneration = grandFatherGeneration;
+		this.grandFatherJob = grandFatherJob;
+		
+	}
+
+	public String getGrandFatherName() {
+		return grandFatherName;
+	}
+
+	public void setGrandFatherName(String grandFatherName) {
+		this.grandFatherName = grandFatherName;
+	}
+
+	public int getGrandFatherAge() {
+		return grandFatherAge;
+	}
+
+	public void setGrandFatherAge(int grandFatherAge) {
+		this.grandFatherAge = grandFatherAge;
+	}
+
+	public String getGrandFatherGeneration() {
+		return grandFatherGeneration;
+	}
+
+	public void setGrandFatherGeneration(String grandFatherGeneration) {
+		this.grandFatherGeneration = grandFatherGeneration;
+	}
+
+	public String getGrandFatherJob() {
+		return grandFatherJob;
+	}
+
+	public void setGrandFatherJob(String grandFatherJob) {
+		this.grandFatherJob = grandFatherJob;
+	}
+
+	public void relation()
+	{
+		System.out.println("This is Grandfather Class");
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "Grandfather [grandFatherName=" + grandFatherName + ", grandFatherAge=" + grandFatherAge
+				+ ", grandFatherGeneration=" + grandFatherGeneration + ", grandFatherJob=" + grandFatherJob
+				+ ", getGrandFatherName()=" + getGrandFatherName() + ", getGrandFatherAge()=" + getGrandFatherAge()
+				+ ", getGrandFatherGeneration()=" + getGrandFatherGeneration() + ", getGrandFatherJob()="
+				+ getGrandFatherJob() + "]";
+	}
+
+}
+
+class Father extends Grandfather
+{
+	private String fatherName;
+	private int fatherAge;
+	private String fatherGeneration;
+	private String fatherJob;
+	
+	public Father(String grandFatherName, int grandFatherAge, String grandFatherGeneration, String grandFatherJob,
+			String fatherName, int fatherAge, String fatherGeneration, String fatherJob) {
+		super(grandFatherName, grandFatherAge, grandFatherGeneration, grandFatherJob);
+		this.fatherName = fatherName;
+		this.fatherAge = fatherAge;
+		this.fatherGeneration = fatherGeneration;
+		this.fatherJob = fatherJob;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public int getFatherAge() {
+		return fatherAge;
+	}
+
+	public void setFatherAge(int fatherAge) {
+		this.fatherAge = fatherAge;
+	}
+
+	public String getFatherGeneration() {
+		return fatherGeneration;
+	}
+
+	public void setFatherGeneration(String fatherGeneration) {
+		this.fatherGeneration = fatherGeneration;
+	}
+
+	public String getFatherJob() {
+		return fatherJob;
+	}
+
+	public void setFatherJob(String fatherJob) {
+		this.fatherJob = fatherJob;
+	}
+
+	public void relation()
+	{
+		System.out.println("This is Father Class");
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Father [fatherName=" + fatherName + ", fatherAge=" + fatherAge + ", fatherGeneration="
+				+ fatherGeneration + ", fatherJob=" + fatherJob + ", getFatherName()=" + getFatherName()
+				+ ", getFatherAge()=" + getFatherAge() + ", getFatherGeneration()=" + getFatherGeneration()
+				+ ", getFatherJob()=" + getFatherJob() + ", getGrandFatherName()=" + getGrandFatherName()
+				+ ", getGrandFatherAge()=" + getGrandFatherAge() + ", getGrandFatherGeneration()="
+				+ getGrandFatherGeneration() + ", getGrandFatherJob()=" + getGrandFatherJob() + "]";
+	}
+		
+}
+
+class Son extends Father
+{
+	private String sonName;
+	private int sonAge;
+	private String sonGeneration;
+	private String sonJob;
+
+	public Son(String grandFatherName, int grandFatherAge, String grandFatherGeneration, String grandFatherJob,
+			String fatherName, int fatherAge, String fatherGeneration, String fatherJob, String sonName, int sonAge,
+			String sonGeneration, String sonJob) {
+		super(grandFatherName, grandFatherAge, grandFatherGeneration, grandFatherJob, fatherName, fatherAge,
+				fatherGeneration, fatherJob);
+		this.sonName = sonName;
+		this.sonAge = sonAge;
+		this.sonGeneration = sonGeneration;
+		this.sonJob = sonJob;
+	}
+
+	public String getSonName() {
+		return sonName;
+	}
+
+	public void setSonName(String sonName) {
+		this.sonName = sonName;
+	}
+
+	public int getSonAge() {
+		return sonAge;
+	}
+
+	public void setSonAge(int sonAge) {
+		this.sonAge = sonAge;
+	}
+
+	public String getSonGeneration() {
+		return sonGeneration;
+	}
+
+	public void setSonGeneration(String sonGeneration) {
+		this.sonGeneration = sonGeneration;
+	}
+
+	public String getSonJob() {
+		return sonJob;
+	}
+
+	public void setSonJob(String sonJob) {
+		this.sonJob = sonJob;
+	}
+
+	public void relation()
+	{
+		System.out.println("This is Son Class");
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "Son [sonName=" + sonName + ", sonAge=" + sonAge + ", sonGeneration=" + sonGeneration + ", sonJob="
+				+ sonJob + ", getSonName()=" + getSonName() + ", getSonAge()=" + getSonAge() + ", getSonGeneration()="
+				+ getSonGeneration() + ", getSonJob()=" + getSonJob() + ", getGrandFatherName()=" + getGrandFatherName()
+				+ ", getGrandFatherAge()=" + getGrandFatherAge() + ", getGrandFatherGeneration()="
+				+ getGrandFatherGeneration() + ", getGrandFatherJob()=" + getGrandFatherJob() + "]";
+	}
+
+}
+
+class GreatGrandSon extends Son
+{
+	private String greatGrandSonName;	
+	private int greatGrandSonAge;
+	private String greatGrandSonGeneration;
+	private String greatGrandSonJob;
+
+	public GreatGrandSon(String grandFatherName, int grandFatherAge, String grandFatherGeneration,
+			String grandFatherJob, String fatherName, int fatherAge, String fatherGeneration, String fatherJob,
+			String sonName, int sonAge, String sonGeneration, String sonJob, String greatGrandSonName,
+			int greatGrandSonAge, String greatGrandSonGeneration, String greatGrandSonJob) {
+		super(grandFatherName, grandFatherAge, grandFatherGeneration, grandFatherJob, fatherName, fatherAge,
+				fatherGeneration, fatherJob, sonName, sonAge, sonGeneration, sonJob);
+		this.greatGrandSonName = greatGrandSonName;
+		this.greatGrandSonAge = greatGrandSonAge;
+		this.greatGrandSonGeneration = greatGrandSonGeneration;
+		this.greatGrandSonJob = greatGrandSonJob;
+	}
+
+	public String getGreatGrandSonName() {
+		return greatGrandSonName;
+	}
+
+	public void setGreatGrandSonName(String greatGrandSonName) {
+		this.greatGrandSonName = greatGrandSonName;
+	}
+
+	public int getGreatGrandSonAge() {
+		return greatGrandSonAge;
+	}
+
+	public void setGreatGrandSonAge(int greatGrandSonAge) {
+		this.greatGrandSonAge = greatGrandSonAge;
+	}
+
+	public String getGreatGrandSonGeneration() {
+		return greatGrandSonGeneration;
+	}
+
+	public void setGreatGrandSonGeneration(String greatGrandSonGeneration) {
+		this.greatGrandSonGeneration = greatGrandSonGeneration;
+	}
+
+	public String getGreatGrandSonJob() {
+		return greatGrandSonJob;
+	}
+
+	public void setGreatGrandSonJob(String greatGrandSonJob) {
+		this.greatGrandSonJob = greatGrandSonJob;
+	}
+
+	public void relation()
+	{
+		System.out.println("This is Great-Grand-Son Class");
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "GreatGrandSon [greatGrandSonName=" + greatGrandSonName + ", greatGrandSonAge=" + greatGrandSonAge
+				+ ", greatGrandSonGeneration=" + greatGrandSonGeneration + ", greatGrandSonJob=" + greatGrandSonJob
+				+ ", getGreatGrandSonName()=" + getGreatGrandSonName() + ", getGreatGrandSonAge()="
+				+ getGreatGrandSonAge() + ", getGreatGrandSonGeneration()=" + getGreatGrandSonGeneration()
+				+ ", getGreatGrandSonJob()=" + getGreatGrandSonJob() + ", getGrandFatherName()=" + getGrandFatherName()
+				+ ", getGrandFatherAge()=" + getGrandFatherAge() + ", getGrandFatherGeneration()="
+				+ getGrandFatherGeneration() + ", getGrandFatherJob()=" + getGrandFatherJob() + "]";
+	}
+	
+}
+
+public class Family {
+
+	public static void main(String[] args) 
+	{
+		Grandfather gf = new GreatGrandSon("Rama",112,"first generation","farmer","jeeva",80,"second generation","business","raja",50,"third generation","police","sankar",25,"fourth generation","software developer");
+		gf.relation();//This is Great Grand Son Method
+		
+		//This is Grandfather Class
+		System.out.println("This is Great-Grand Son Attributes");
+		System.out.println(gf.getGrandFatherName());
+		System.out.println(gf.getGrandFatherAge());
+		System.out.println(gf.getGrandFatherGeneration());
+		System.out.println(gf.getGrandFatherJob());
+		
+		//To String Overriding
+		System.out.println(gf);
+	}
+
+}
