@@ -1,0 +1,53 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+public class Main
+{
+    public static String commonPrefix(String str1, String str2)
+    {
+        int lengthStr1 = str1.length();
+        int lengthStr2 = str2.length();
+        int i, j;
+        String result = "";
+        for(i = 0, j = 0; i <= lengthStr1 -1 && j <= lengthStr2 -1; i++, j++ )
+        {
+            if(str1.charAt(i) != str2.charAt(j))
+            {
+                break;
+            }
+            result += str1.charAt(i);
+        }
+        return (result);
+    }
+    
+    public static String longestCommonPrefix(String array[])
+    {
+        String firstString = array[0];
+        int i;
+        for(i = 1; i <= array.length-1; i++)
+        {
+            firstString = commonPrefix(firstString, array[i]);
+        }
+        return firstString;
+    }
+    
+	public static void main(String[] args) {
+		String array[] = {"hellohowareyou", "hellohow", "hello"};
+		
+		String prefixString = longestCommonPrefix(array);
+		
+		if(prefixString.length() > 0)
+        {
+            System.out.println(prefixString);
+        }
+        else
+        {
+            System.out.println("There is no common prefix");
+        }
+	}
+}
