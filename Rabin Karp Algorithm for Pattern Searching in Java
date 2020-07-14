@@ -1,0 +1,57 @@
+public class Main  
+{ 
+    
+    public final static int numberOfCharacters = 256; 
+      
+    
+    static void search(String pattern, String originalText, int primeNumber) 
+    { 
+        int PatternLength = pattern.length(); 
+        int originalTextLength = originalText.length(); 
+        int i, j; 
+        int hashValueForPattern = 0; 
+        int hashValueForOriginalText = 0; 
+        int h = 1; 
+      
+        
+        for (i = 0; i < PatternLength-1; i++) 
+            h = (h*numberOfCharacters)%primeNumber; 
+      
+        for (i = 0; i < PatternLength; i++) 
+        { 
+            hashValueForPattern = (numberOfCharacters*hashValueForPattern + pattern.charAt(i))%primeNumber; 
+            hashValueForOriginalText = (numberOfCharacters*hashValueForOriginalText + originalText.charAt(i))%primeNumber; 
+        } 
+      
+        for (i = 0; i <= originalTextLength - PatternLength; i++) 
+        { 
+            if ( hashValueForPattern == hashValueForOriginalText ) 
+            { 
+                for (j = 0; j < PatternLength; j++) 
+                { 
+                    if (originalText.charAt(i+j) != pattern.charAt(j)) 
+                        break; 
+                } 
+      
+                if (j == PatternLength) 
+                    System.out.println("Pattern found at index " + i); 
+            } 
+      
+            if ( i < originalTextLength-PatternLength ) 
+            { 
+                hashValueForOriginalText = (numberOfCharacters*(hashValueForOriginalText - originalText.charAt(i)*h) + originalText.charAt(i+PatternLength))%primeNumber; 
+      
+                if (hashValueForOriginalText < 0) 
+                hashValueForOriginalText = (hashValueForOriginalText + primeNumber); 
+            } 
+        } 
+    } 
+      
+    public static void main(String[] args) 
+    { 
+        String originalText = "Hello world"; 
+        String pattern = "Hello"; 
+        int primeNumber = 101; 
+        search(pattern, originalText, primeNumber); 
+    } 
+} 
