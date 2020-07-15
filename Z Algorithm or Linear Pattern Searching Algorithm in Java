@@ -1,0 +1,88 @@
+class Main
+{
+  public static void search (String originalText, String pattern)
+  {
+
+    String concatString = pattern + "$" + originalText;
+
+    int concatStringLength = concatString.length ();
+
+    int patternMatchingArray[] = new int[concatStringLength];
+
+      getZarr (concatString, patternMatchingArray);
+
+    for (int indexOfOuterArray = 0; indexOfOuterArray < concatStringLength;++indexOfOuterArray)
+      {
+
+	if (patternMatchingArray[indexOfOuterArray] == pattern.length ())
+
+	  {
+
+	    System.out.println ("Pattern found at index " + (indexOfOuterArray - pattern.length () - 1));
+	  }
+
+      }
+
+  }
+
+  private static void getZarr (String concatString, int[]patternMatchingArray)
+  {
+    int concatStringLength = concatString.length ();
+
+    int arrayLeftBound = 0, arrayRightBound = 0;
+
+    for (int indexOfOuterLoop = 1; indexOfOuterLoop < concatStringLength; ++indexOfOuterLoop)
+      {
+
+ 	  if (indexOfOuterLoop > arrayRightBound)
+	  {
+	    arrayLeftBound = arrayRightBound = indexOfOuterLoop;
+
+	    while (arrayRightBound < concatStringLength &&
+	    concatString.charAt (arrayRightBound - arrayLeftBound) == concatString.charAt (arrayRightBound))
+	    {
+		arrayRightBound++;
+        }
+
+	    patternMatchingArray[indexOfOuterLoop] = arrayRightBound - arrayLeftBound;
+
+	    arrayRightBound--;
+	  }
+
+	else
+	  {
+	    int matchingNumber = indexOfOuterLoop - arrayLeftBound;
+
+	    if (patternMatchingArray[matchingNumber] < arrayRightBound - indexOfOuterLoop + 1)
+        {
+	      patternMatchingArray[indexOfOuterLoop] = patternMatchingArray[matchingNumber];
+        }
+
+	    else
+	      {
+		    arrayLeftBound = indexOfOuterLoop;
+
+		    while (arrayRightBound < concatStringLength
+		       && concatString.charAt (arrayRightBound - arrayLeftBound) == concatString.charAt (arrayRightBound))
+            {
+		        arrayRightBound++;
+            }
+
+		    patternMatchingArray[indexOfOuterLoop] = arrayRightBound - arrayLeftBound;
+
+		    arrayRightBound--;
+
+	      }
+	  }
+    }
+  }
+
+  public static void main (String[]args)
+  {
+    String originalText = "GEEKS FOR GEEKS";
+
+    String pattern = "GEEK";
+
+    search (originalText, pattern);
+  }
+}
