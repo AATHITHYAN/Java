@@ -1,0 +1,76 @@
+class Main { 
+    static void KMPSearch(String pattern, String originalText) 
+    { 
+        int patternLength = pattern.length(); 
+        int originalTextLength = originalText.length(); 
+  
+        
+        int longestPrefixSuffixValues[] = new int[patternLength]; 
+        int indexForPattern = 0; 
+  
+      
+        computeLPSArray(pattern, patternLength, longestPrefixSuffixValues); 
+  
+        int indexForOriginalText = 0;  
+        while (indexForOriginalText < originalTextLength) { 
+            if (pattern.charAt(indexForPattern) == originalText.charAt(indexForOriginalText)) { 
+                indexForPattern++; 
+                indexForOriginalText++; 
+            } 
+            if (indexForPattern == patternLength) { 
+                System.out.println("Found pattern "
+                                   + "at index " + (indexForOriginalText - indexForPattern)); 
+                indexForPattern = longestPrefixSuffixValues[indexForPattern - 1]; 
+            } 
+  
+            
+            else if (indexForOriginalText < originalTextLength && pattern.charAt(indexForPattern) != originalText.charAt(indexForOriginalText)) { 
+              
+                if (indexForPattern != 0) 
+                {
+                   indexForPattern = longestPrefixSuffixValues[indexForPattern - 1]; 
+                }
+                else
+                {
+                    indexForOriginalText = indexForOriginalText + 1; 
+                }
+            }
+        } 
+    } 
+  
+    static void computeLPSArray(String pattern, int patternLength, int longestPrefixSuffixValues[]) 
+    { 
+        
+        int lengthOfMatchingValue= 0; 
+        int index = 1; 
+        longestPrefixSuffixValues[0] = 0; 
+  
+         
+        while (index < patternLength) { 
+            if (pattern.charAt(index) == pattern.charAt(lengthOfMatchingValue)) { 
+                lengthOfMatchingValue++; 
+                longestPrefixSuffixValues[index] = lengthOfMatchingValue; 
+                index++; 
+            } 
+            else 
+            { 
+                if (lengthOfMatchingValue != 0)
+                { 
+                    lengthOfMatchingValue = longestPrefixSuffixValues[lengthOfMatchingValue - 1];
+                } 
+                else 
+                { 
+                    longestPrefixSuffixValues[index] = lengthOfMatchingValue; 
+                    index++; 
+                } 
+            } 
+        } 
+    } 
+  
+    public static void main(String args[]) 
+    { 
+        String originalText = "ABABDABACDABABCABAB"; 
+        String pattern = "ABABCABAB"; 
+        KMPSearch(pattern, originalText); 
+    } 
+} 
