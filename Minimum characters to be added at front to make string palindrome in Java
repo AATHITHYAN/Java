@@ -1,0 +1,50 @@
+//Minimum characters to be added at front to make string palindrome:
+
+import java.util.Scanner;
+
+public class Main
+{
+    public static boolean toMakePalindrome(String stringText)
+    {
+        int stringTextLength = stringText.length();
+        int i, j;
+        
+        for(i = 0, j = stringTextLength-1; i <= j; i++, j--)
+        {
+            if(stringText.charAt(i)!=stringText.charAt(j))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public static void main (String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your String: ");
+        String stringText = sc.next();
+        boolean flag = false;
+        int count = 0;
+        int stringTextLength = stringText.length();
+        
+        while(stringTextLength > 0)
+        {
+            if(toMakePalindrome(stringText))
+            {
+                flag = true;
+                break;
+            }
+            else
+            {
+                count++;
+                stringText = stringText.substring(0, stringText.length()-1);
+            }
+        }
+        if(flag)
+        {
+            System.out.println(count + " is need to make this string palindrome!");
+        }
+        
+    }
+}
