@@ -1,0 +1,53 @@
+package learning;
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class CheckForAnagram
+{
+        public static boolean checkForAnagram(String string1, String string2)
+        {
+            char charString1[] = string1.toCharArray();
+            char charString2[] = string2.toCharArray();
+
+            int string1Length = string1.length();
+            int string2Length = string2.length();
+            int i;
+
+            if(string1Length != string2Length)
+            {
+                return false;
+            }
+
+            Arrays.sort(charString1);
+            Arrays.sort(charString2);
+
+            for(i = 0; i < string1Length; i++)
+            {
+                if(charString1[i] != charString2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static void main (String[] args)
+        {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter the 1st String: ");
+            String string1 = sc.nextLine();
+            System.out.println("Enter the 2nd String: ");
+            String string2 = sc.nextLine();
+
+            if(checkForAnagram(string1, string2))
+            {
+                System.out.println("It makes Anagram!");
+            }
+            else
+            {
+                System.out.println("It doesn't make Anagram!");
+            }
+        }
+}
