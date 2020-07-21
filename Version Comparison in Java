@@ -1,0 +1,67 @@
+package learning;
+
+import java.util.Scanner;
+
+public class VersionComparison
+{
+    public static int calculateVersionNumber(String versionNumber1, String versionNumber2)
+    {
+        int versionNumber1Length = versionNumber1.length();
+        int versionNumber2Length = versionNumber2.length();
+        int i, j;
+        int tempForVersion1 = 0;
+        int tempForVersion2 = 0;
+
+        for(i = 0, j = 0; i < versionNumber1Length && j < versionNumber2Length; )
+        {
+            while(i < versionNumber1Length && versionNumber1.charAt(i) != '.')
+            {
+                tempForVersion1 = tempForVersion1 * 10 + (versionNumber1.charAt(i) - '0');
+                i++;
+            }
+
+            while(j < versionNumber2Length && versionNumber2.charAt(j) != '.')
+            {
+                tempForVersion2 = tempForVersion2 * 10 + (versionNumber2.charAt(j) - '0');
+                j++;
+            }
+
+            if(tempForVersion1 > tempForVersion2)
+            {
+                return 1;
+            }
+            if(tempForVersion1 < tempForVersion2)
+            {
+                return -1;
+            }
+
+            tempForVersion1 = tempForVersion2 = 0;
+            i++;
+            j++;
+
+        }
+        return 0;
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your version 1: ");
+        String versionNumber1 = sc.next();
+        System.out.println("Enter your version 2: ");
+        String versionNumber2 = sc.next();
+
+        if(calculateVersionNumber(versionNumber1, versionNumber2) < 0)
+        {
+            System.out.println(versionNumber1 + " is small");
+        }
+        else if(calculateVersionNumber(versionNumber1, versionNumber2) > 0)
+        {
+            System.out.println(versionNumber2 + " is small");
+        }
+        else
+        {
+            System.out.println("Both the version is equal");
+        }
+    }
+}
