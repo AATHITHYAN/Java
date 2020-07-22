@@ -1,0 +1,53 @@
+//Two Sum using HashMap:
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class TwoSumUsingHashMap
+{
+    public static int[] twoSum(int array[], int target)
+    {
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        int i, compliment;
+        for(i = 0; i < array.length; i++)
+        {
+            compliment = target - array[i];
+            if(hashMap.containsKey(compliment))
+            {
+                return new int[] {hashMap.get(compliment), i};
+            }
+            else {
+                hashMap.put(array[i], i);
+            }
+
+        }
+        return new int[] {};
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the array: ");
+        int size = sc.nextInt();
+        int array[] = new int[size];
+        System.out.println("Enter the values in the array: ");
+        int i;
+        for (i = 0; i < size; i++)
+        {
+            System.out.println("Enter the " + i+1 + " value: ");
+            array[i] = sc.nextInt();
+        }
+        int target;
+        System.out.println("Enter the target value: ");
+        target = sc.nextInt();
+        int index[] = twoSum(array, target);
+
+        if(index.length == 2)
+        {
+            System.out.println("[ " + index[0] + " , " + index[1] + " ]");
+        }
+        else
+        {
+            System.out.println("There is no target value two sum in the array! ");
+        }
+    }
+}
