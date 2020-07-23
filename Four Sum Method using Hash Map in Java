@@ -1,0 +1,66 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class FourSumUsingHashMap
+{
+    public static class pairClass
+    {
+        int firstNumber;
+        int secondNumber;
+
+        public pairClass(int firstNumber, int secondNumber)
+        {
+            this.firstNumber = firstNumber;
+            this.secondNumber = secondNumber;
+        }
+    }
+
+    public static void fourSumUsingHashMap(int array[], int target)
+    {
+        Map<Integer, pairClass> hashMap = new HashMap<Integer, pairClass>();
+        int i, j;
+        for(i = 0; i < array.length-1; i++)
+        {
+            for(j = i+1; j < array.length; j++)
+            {
+                hashMap.put(array[i] + array[j], new pairClass(i, j));
+            }
+        }
+
+        for(i = 0; i < array.length-1; i++)
+        {
+            for(j = i+1; j < array.length; j++)
+            {
+                if(hashMap.containsKey(target - (array[i] + array[j])))
+                {
+                    pairClass pair = hashMap.get(target - (array[i] + array[j]));
+
+                    if(pair.firstNumber != i && pair.firstNumber != j && pair.secondNumber != i && pair.secondNumber != j)
+                    {
+                        System.out.println(array[i] + " , " + array[j] + " , " + array[pair.firstNumber] + " , " + array[pair.secondNumber]);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the array size: ");
+        int size = sc.nextInt();
+        System.out.println("Enter the values for array: ");
+        int i;
+        int array[] = new int[size];
+        for(i = 0; i < size; i++)
+        {
+            System.out.println("Enter the " + i + " value of the array: ");
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Enter the target value: ");
+        int target = sc.nextInt();
+        fourSumUsingHashMap(array, target);
+    }
+}
