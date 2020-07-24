@@ -1,0 +1,112 @@
+package CollectionsFramework;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class ComparatorMethod 
+{
+	private int rollNumber;
+	private String name;
+	private String address;
+	
+	public ComparatorMethod() {
+		super();
+	}
+
+	public ComparatorMethod(int rollNumber, String name, String address) {
+		super();
+		this.rollNumber = rollNumber;
+		this.name = name;
+		this.address = address;
+	}
+
+	public int getRollNumber() {
+		return rollNumber;
+	}
+
+	public void setRollNumber(int rollNumber) {
+		this.rollNumber = rollNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		ComparatorMethod cmp = new ComparatorMethod();
+		ArrayList<ComparatorMethod> arrayList = new ArrayList<>();
+		while(true)
+		{
+			System.out.println("Enter the roll number: ");
+			cmp.setRollNumber(sc.nextInt());
+			System.out.println();
+			System.out.println("Enter the name:");
+			cmp.setName(sc.nextLine());
+			System.out.println("Enter the address: ");
+			cmp.setAddress(sc.nextLine());
+			arrayList.add(new ComparatorMethod(cmp.getRollNumber(),cmp.getName(), cmp.address));
+			
+			System.out.println("Enter 'exit' to exit the program: ");
+			if("exit".equalsIgnoreCase(sc.next()))
+			{
+				break;
+			}
+		}
+		sc.close();
+		//Before Sort:
+		for(ComparatorMethod cmpp: arrayList)
+		{
+			System.out.println(cmpp.rollNumber);
+			System.out.println(cmpp.name);
+			System.out.println(cmpp.address);
+		}
+		Collections.sort(arrayList, new Comparator<ComparatorMethod>() {
+			/*Sort String
+			@Override
+			public int compare(ComparatorMethod o1, ComparatorMethod o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});*/
+			
+			//Sort Integer
+			@Override
+			public int compare(ComparatorMethod o1, ComparatorMethod o2)
+			{
+				if(o1.getRollNumber() > o2.getRollNumber())
+				{
+					return 1;
+				}
+				else if(o1.getRollNumber() < o2.getRollNumber())
+				{
+					return -1;
+				}
+				return 0;
+			}
+		});
+		
+		//After Sort:
+				for(ComparatorMethod cmpp: arrayList)
+				{
+					System.out.println(cmpp.rollNumber);
+					System.out.println(cmpp.name);
+					System.out.println(cmpp.address);
+				}
+	}
+
+}
