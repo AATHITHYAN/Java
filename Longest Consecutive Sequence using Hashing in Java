@@ -1,0 +1,52 @@
+package javaPrograms;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class LongestConsecutiveSequence 
+{
+	public static void calculate(int array[])
+	{
+		Set<Integer> hashSet = new HashSet<>();
+		int i, length = 0;
+		for(i = 0; i < array.length; i++)
+		{
+			hashSet.add(array[i]);
+		}
+		
+		//Calculate:
+		for(i = 0; i < array.length; i++)
+		{
+			if(!hashSet.contains(array[i] - 1))
+			{
+				int j = array[i];
+				while(hashSet.contains(j))
+				{
+					j++;
+				}
+				if(length < j - array[i])
+				{
+					length = j - array[i];
+				}
+			}
+		}
+		System.out.println(length);
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your size of the array: ");
+		int size = sc.nextInt();
+		System.out.println("Enter your values in the array: ");
+		int array[] = new int[size];
+		for(int i = 0; i < size ; i++)
+		{
+			System.out.println("Enter your values of " + i + " Element in the array: ");
+			array[i] = sc.nextInt();
+		}
+		calculate(array);
+	}
+}
