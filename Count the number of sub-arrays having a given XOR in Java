@@ -1,0 +1,62 @@
+package javaPrograms;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CountWithXOR 
+{
+	public static void calculate(int array[], int size, int target)
+	{
+		long maxLength = 0;
+		int tempArray[] = new int[size];
+		Map<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+		
+		tempArray[0] = array[0];
+		
+		for(int i = 1; i < size; i++)
+		{
+			tempArray[i] = tempArray[i-1]^array[i]; 
+		}
+		
+		for(int i = 0; i < size; i++)
+		{
+			int temp = target^tempArray[i];
+			
+			maxLength = maxLength + (hashMap.containsKey(temp) == false ? 0 : ((long)hashMap.get(temp)));
+			
+			if(tempArray[i] == target)
+			{
+				maxLength++;
+			}
+			
+			if(hashMap.containsKey(tempArray[i]))
+			{
+				hashMap.put(tempArray[i], hashMap.get(tempArray[i]) + 1);
+			}
+			else
+			{
+				hashMap.put(tempArray[i], 1);
+			}
+		}
+		System.out.println("The Maximum Length is: " + maxLength);
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the size of the array: ");
+		int size = sc.nextInt();
+		int array[] = new int[size];
+		for(int i = 0; i < size; i++)
+		{
+			System.out.println("Enter the " + i + " element of the array: ");
+			array[i] = sc.nextInt();
+		}
+		System.out.println("Enter the target value: ");
+		int target = sc.nextInt();
+		calculate(array, size, target);
+		sc.close();
+	}
+
+}
