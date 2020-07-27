@@ -1,0 +1,32 @@
+package javaPrograms;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class LongestSubStringWithoutRepeat 
+{
+	final static int size = 256;
+	static void calculate(String str)
+	{
+		int arrayLength = str.length();
+		int array[] = new int[size];
+		int totalLength = 0;
+		Arrays.fill(array, -1);
+		int i = 0, j;
+		for(j = 0; j < arrayLength; j++)
+		{
+			i = Math.max(i, array[str.charAt(j)] + 1);
+			totalLength = Math.max(totalLength, (j - i) + 1);
+			array[str.charAt(j)] = j;
+		}
+		System.out.println("Longest length of sub-array without duplicate is: " + totalLength);
+	}
+	
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		sc.close();
+		calculate(str);
+	}
+}
