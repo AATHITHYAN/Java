@@ -1,0 +1,64 @@
+package fullStackJavaDevelopment;
+
+public class ReverseLinkedList
+{
+	static Node head;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			this.next = null;
+		}
+	}
+	
+	Node reverseLinkedList(Node node)
+	{
+		Node prev = null;
+		Node next = null;
+		Node current = node;
+		
+		while(current != null) 
+		{
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+		}
+		node = prev;
+		return node;
+		
+	}
+	
+	public static void printLinkedList(Node node)
+	{
+		while(node != null)
+		{
+			System.out.println(node.data + " " );
+			node = node.next;
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println("Enter size of the linkedlist: ");
+		ReverseLinkedList rvl = new ReverseLinkedList();
+		rvl.head = new Node(1);
+		rvl.head.next = new Node(2);
+		rvl.head.next.next = new Node(3);
+		rvl.head.next.next.next = new Node(4);
+		rvl.head.next.next.next.next = new Node(5); 
+		
+		System.out.println("Before Reversing Linked List: ");
+		printLinkedList(head);
+		
+		head = rvl.reverseLinkedList(head);
+		
+		System.out.println("After Reversing Linked List: ");
+		printLinkedList(head);
+	}
+}
