@@ -1,0 +1,86 @@
+package javaPrograms;
+
+import java.util.Scanner;
+
+public class MiddleElementInLinkedList 
+{
+	Node head;
+	
+	public MiddleElementInLinkedList() {
+		this.head = null;
+	}
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		Node(int data)
+		{
+			this.data = data;
+			this.next = null;
+		}
+	}
+	
+	public Node insert(int data)
+	{
+		if(head == null)
+		{
+			head = new Node(data);
+		}
+		
+		else
+		{
+			Node temp = new Node(data);
+			
+			temp.next = head;
+			
+			head = temp;
+		}
+		
+		return head;
+	}
+	
+	public void middleElement()
+	{
+		Node slow = head;
+		Node fast = head;
+		
+		while(fast != null && fast.next != null)
+		{
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		System.out.println("Middle Value is : " + slow.data);
+	}
+	
+	public void print()
+	{
+		Node temp = head;
+		
+		while(temp != null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the size of the Linkedlist: ");
+		int size = sc.nextInt();
+		
+		MiddleElementInLinkedList meill = new MiddleElementInLinkedList();
+		for(int i = 0; i < size; i++)
+		{
+			System.out.println("Enter the " + i + "th value of linked list: ");
+			meill.insert(sc.nextInt());
+		}
+		
+		meill.middleElement();
+		
+		meill.print();
+	}
+}
