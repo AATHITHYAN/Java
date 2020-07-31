@@ -1,0 +1,78 @@
+package javaPrograms;
+
+public class DeleteNthNodeInLinkedList 
+{
+	Node head;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	
+	public void insert(int data)
+	{
+		Node temp = new Node(data);
+		temp.next = head;
+		head = temp;
+	}
+	
+	public void print()
+	{
+		Node temp = head;
+		
+		while(temp != null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+	
+	public void delete(int data)
+	{
+		Node first = head;
+		Node second = head;
+		
+		for(int i = 0; i < data; i++)
+		{
+			if(second.next == null)
+			{
+				if(i == data - 1)
+				{
+					head = head.next;
+				}
+				return;
+			}
+		}
+		
+		second = second.next;
+		
+		while(second.next != null)
+		{
+			first = first.next;
+			second = second.next;
+		}
+		first.next = first.next.next;
+	}
+	
+	public static void main(String[] args) {
+		DeleteNthNodeInLinkedList dnnill = new DeleteNthNodeInLinkedList();
+		dnnill.insert(2);
+		dnnill.insert(1);
+		dnnill.insert(3);
+		dnnill.insert(7);
+		
+		dnnill.print();
+		
+		int toDelete = 1;
+		
+		dnnill.delete(toDelete);
+		
+		dnnill.print();
+	}
+}
