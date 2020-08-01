@@ -1,0 +1,78 @@
+package javaPrograms;
+
+public class DeleteAtGivenPositionLinkedList 
+{
+	Node head;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	public void insert(int data)
+	{
+		Node node = new Node(data);
+		node.next = head;
+		head = node;		
+	}
+	
+	public void print()
+	{
+		Node temp = head;
+		while(temp != null)
+		{
+			System.out.println(temp.data);
+			temp = temp.next;
+		}
+	}
+
+	public void remove(int pos)
+	{
+		if(head == null)
+		{
+			return;
+		}
+		
+		Node temp = head;
+		
+		if(pos == 0)
+		{
+			head = head.next;
+			return;
+		}
+		
+		for(int i = 0; temp != null && i < pos - 1; i++)
+		{
+			temp = temp.next;
+		}
+		
+		if(temp == null || temp.next == null)
+		{
+			return;
+		}
+		
+		Node etemp = temp.next.next;
+		temp.next = etemp;
+	}
+	
+	public static void main(String[] args) 
+	{
+		DeleteAtGivenPositionLinkedList dgpl = new DeleteAtGivenPositionLinkedList();
+		dgpl.insert(5);
+		dgpl.insert(6);
+		dgpl.insert(7);
+		dgpl.insert(8);
+		
+		dgpl.print();
+		
+		dgpl.remove(3);
+		
+		dgpl.print();
+	}
+}
