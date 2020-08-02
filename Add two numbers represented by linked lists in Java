@@ -1,0 +1,90 @@
+package javaPrograms;
+
+public class AddtionOfTwoLinkedList
+{
+	static Node head1, head2;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	
+	public Node addMethod(Node first, Node second)
+	{
+		Node previous = null;
+		Node result = null;
+		int carry = 0, sum;
+		Node temp = null;
+		
+		while(first != null || second != null)
+		{
+			sum = carry + (first !=  null ? first.data : 0)
+					+ (second != null ? second.data : 0);
+			
+			carry = (sum >= 10 ? 1 : 0);
+			
+			sum = sum % 10;
+			
+			temp = new Node(sum);
+			
+			if(result == null)
+			{
+				result = temp;
+			}
+			
+			else
+			{
+				previous.next = temp;
+			}
+			
+			previous = temp;
+			
+			if(first != null)
+			{
+				first = first.next;
+			}
+			
+			if(second != null)
+			{
+				second = second.next;
+			}
+		}
+		
+		return result;
+	}
+	
+	public void print(Node head)
+	{
+		while(head != null)
+		{
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+		System.out.println();
+	}
+	
+	public static void main(String[] args) 
+	{
+		AddtionOfTwoLinkedList aotll = new AddtionOfTwoLinkedList();
+		
+		aotll.head1 = new Node(7);
+		aotll.head1.next = new Node(5);
+		aotll.head1.next.next = new Node(9);
+		aotll.head1.next.next.next = new Node(4);
+		aotll.head1.next.next.next.next = new Node(6);
+		
+		aotll.head2 = new Node(8);
+		aotll.head2.next = new Node(4);
+		
+		Node rs = aotll.addMethod(head1, head2);
+		
+		aotll.print(rs);
+	}
+}
