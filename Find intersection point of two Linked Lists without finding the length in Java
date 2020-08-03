@@ -1,0 +1,75 @@
+package javaPrograms;
+
+public class IntersectionPointLinkedList
+{
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	
+	public static int intersect(Node head1, Node head2)
+	{
+		Node temp1 = head1;
+		Node temp2 = head2;
+		
+		if(temp1 == null || temp2 == null)
+		{
+			return -1;
+		}
+		
+		while(temp1 != null && temp2 != null && temp1 != temp2)
+		{
+			temp1 = temp1.next;
+			temp2 = temp2.next;
+			
+			if(temp1 == temp2)
+			{
+				return temp1.data;
+			}
+			
+			if(temp1 == null)
+			{
+				temp1 = head2;
+			}
+			
+			if(temp2 == null)
+			{
+				temp2 = head1;
+			}
+		}
+		return temp1.data;
+	}
+	
+	public static void main(String[] args)
+	{
+		Node temp;
+		
+		Node head1 = new Node(10);
+		
+		Node head2 = new Node(3);
+		
+		temp = new Node(6);
+		head2.next = temp;
+		
+		temp = new Node(9);
+		head2.next.next = temp;
+		
+		temp = new Node(15);
+		head1.next = temp;
+		head2.next.next.next = temp;
+		
+		temp = new Node(30);
+		head1.next.next = temp;
+		
+		head1.next.next.next = null;
+		
+		System.out.println(intersect(head1, head2));
+	}
+}
