@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main
+{
+	public static void main(String[] args) {
+		int n,i,j,tot=0,cal=0,no;
+		String ch;
+	    Scanner sc=new Scanner(System.in);
+	  do{
+	        System.out.println("Items ");
+	        System.out.println("1. Chips-- Rs.5 ");
+	        System.out.println("2. Coke--- Rs.40 ");
+	        System.out.println("3. Cake--- Rs.10 ");
+	        System.out.println("Select your items ");
+	        n=sc.nextInt();
+	        if(n>0&&n<4)
+	        {
+	            if(n==1)
+	            {
+	                System.out.println("Howmuch you want? ");
+	                no=sc.nextInt();
+	                cal+=no*5;
+	            }
+	            else if(n==2)
+	            {
+	                System.out.println("Howmuch you want? ");
+	                no=sc.nextInt();
+	                cal+=no*40;
+	            }
+	            else
+	            {
+	                System.out.println("Howmuch you want? ");
+	                no=sc.nextInt();
+	                cal+=no*10;
+	            }
+	        }
+	        System.out.println("To Continue Press Y or To Exit Press N");
+	        ch=sc.next();
+	        } 
+	        while(ch.equalsIgnoreCase("Y"));
+	       
+	        if(ch.equalsIgnoreCase("N"))
+	        {
+	            System.out.println("Your Bill is Rs: "+cal);
+	            System.out.println("Thank You for Shopping and Come Again!!! ");
+	        }	    
+	}
+}
