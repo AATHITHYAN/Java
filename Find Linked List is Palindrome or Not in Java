@@ -1,0 +1,67 @@
+package javaPrograms;
+
+import java.util.Stack;
+
+public class PalindromeOrNotLinkedList 
+{
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+		
+		public static boolean isPalindromee(Node head)
+		{
+			Node temp = head;
+			boolean isPal = true;
+			Stack<Integer> st = new Stack<Integer>();
+			
+			while(temp != null)
+			{
+				st.push(temp.data);
+				temp = temp.next;
+			}
+			
+			while(head != null)
+			{
+				int value = st.pop();
+				if(value == head.data)
+				{
+					isPal = true;
+				}
+				else
+				{
+					isPal = false;
+					break;
+				}
+				head = head.next;
+			}
+			return isPal;
+		}
+	}
+	public static void main(String args[])
+	{
+		Node head = new Node(1);
+		Node n1 = new Node(2);
+		Node n2 = new Node(3);
+		Node n3 = new Node(4);
+		Node n4 = new Node(3);
+		Node n5 = new Node(2);
+		Node n6 = new Node(1);
+		
+		head.next = n1;
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n4;
+		 n4.next = n5;
+		n5.next = n6;
+		
+		System.out.println(isPalindromee(head));
+		
+	}
+}
