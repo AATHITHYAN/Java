@@ -1,0 +1,80 @@
+package javaPrograms;
+
+public class ReverseLinkedListGroups 
+{
+	Node head;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	
+	public void insert(int data)
+	{
+		Node temp = new Node(data);
+		temp.next = head;
+		head = temp;
+	}
+	
+	public void print()
+	{
+		Node temp = head;
+		while(temp != null)
+		{
+			System.out.print(temp.data);
+			temp = temp.next;
+		}
+		System.out.println();
+	}
+	
+	public Node reverseInGroups(Node head, int target)
+	{
+		Node current = head;
+		Node next = null;
+		Node previous = null;
+		
+		int count = 0;
+		
+		while(count < target && current != null)
+		{
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+			count++;
+		}
+		
+		if(next != null)
+		{
+			head.next = reverseInGroups(next, target);
+		}
+		return previous;
+	}
+
+	public static void main(String[] args) 
+	{
+		ReverseLinkedListGroups rllg = new ReverseLinkedListGroups();
+		rllg.insert(9);
+		rllg.insert(8);
+		rllg.insert(7);
+		rllg.insert(6);
+		rllg.insert(5);
+		rllg.insert(4);
+		rllg.insert(3);
+		rllg.insert(2);
+		rllg.insert(1);
+		
+		rllg.print();
+		
+		rllg.head= rllg.reverseInGroups(rllg.head, 3);
+		
+		rllg.print();
+	}
+}
