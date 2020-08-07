@@ -1,0 +1,86 @@
+package javaPrograms;
+
+public class RemoveLoopLinkedList
+{
+	Node head;
+	
+	static class Node
+	{
+		int data;
+		Node next;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			next = null;
+		}
+	}
+	
+	public void insert(int data)
+	{
+		Node temp = new Node(data);
+		temp.next = head;
+		head = temp;
+	}
+	
+	public void print(Node node)
+	{
+		while(node != null)
+		{
+			System.out.println(node.data);
+			node = node.next;
+		}
+	}
+	
+	public void detectRemove(Node node)
+	{
+		if(node == null || node.next == null)
+		{
+			return;
+		}
+		
+		Node slow = node;
+		Node fast = node;
+		
+		slow = slow.next;
+		fast = fast.next.next;
+		
+		while(fast != null && fast.next != null)
+		{
+			if(slow == fast)
+			{
+				break;
+			}
+			
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		if(slow == fast)
+		{
+			slow = node;
+		}
+		
+		while(slow.next != fast.next)
+		{
+			slow = slow.next;
+			fast = fast.next;
+		}
+		
+		fast.next = null;
+	}
+
+	public static void main(String[] args) 
+	{
+		RemoveLoopLinkedList rlll = new RemoveLoopLinkedList();
+		rlll.head = new Node(50);
+		rlll.head.next = new Node(20);
+		rlll.head.next.next = new Node(15);
+		rlll.head.next.next.next = new Node(4);
+		rlll.head.next.next.next.next = new Node(10);
+		
+		rlll.head.next.next.next.next.next = rlll.head.next.next;
+		rlll.detectRemove(rlll.head);
+		rlll.print(rlll.head);
+	}
+}
