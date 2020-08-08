@@ -1,0 +1,115 @@
+package javaPrograms;
+
+public class FlatteningSortedLinkedList 
+{
+	Node root;
+	
+	public FlatteningSortedLinkedList()
+	{
+		root = null;
+	}
+	
+	static class Node
+	{
+		int data;
+		Node right;
+		Node next;
+	}
+	
+	public Node getNewNode(int data)
+	{
+		Node temp = new Node();
+		temp.data = data;
+		temp.right = null;
+		temp.next = null;
+		
+		return temp;
+	}
+	
+	public Node insert(Node node, int data)
+	{
+		if(node == null)
+		{
+			return getNewNode(data);
+		}
+		node.next =  insert(node.next, data);
+		return node;
+	}
+	
+	public void print(Node node)
+	{
+		if(node == null)
+		{
+			return;
+		}
+		
+		System.out.println(node.data);
+		print(node.next);
+	}
+	
+	public Node flatten(Node node) 
+	{ 
+        if (node == null || node.right == null)
+        {
+            return node; 
+        }
+        return merge(node, flatten(node.right)); 
+	}
+	
+	public Node merge(Node first, Node second)
+	{ 
+        Node temp = new Node(); 
+        Node finalList = temp; 
+        
+        while (first != null && second != null) 
+        {
+            if (first.data < second.data)
+            { 
+                temp.next = first; 
+                first = first.next; 
+            }
+            else
+            { 
+                temp.next = second; 
+                second = second.next; 
+            } 
+            temp = temp.next; 
+        } 
+        
+        temp.next = (first != null) ? first : second; 
+        finalList.next.right = null; 
+        return finalList.next; 
+    } 
+	
+	public static void main(String[] args) 
+	{
+		FlatteningSortedLinkedList fsll = new FlatteningSortedLinkedList();
+
+		Node root = null; 
+		
+        root = fsll.insert(root, 20); 
+        root = fsll.insert(root, 22);
+        root = fsll.insert(root, 25);
+        root = fsll.insert(root, 65); 
+        root = fsll.insert(root, 70); 
+
+        root.right = fsll.insert(root.right, 7); 
+        root.right = fsll.insert(root.right, 12); 
+        root.right = fsll.insert(root.right, 23);
+        root.right = fsll.insert(root.right, 34);
+
+        root.right.right = fsll.insert(root.right.right, 10); 
+        root.right.right = fsll.insert(root.right.right, 15); 
+        root.right.right = fsll.insert(root.right.right, 17); 
+        root.right.right = fsll.insert(root.right.right, 18);
+        root.right.right = fsll.insert(root.right.right, 21);
+        root.right.right = fsll.insert(root.right.right, 33);
+
+        root.right.right.right = fsll.insert(root.right.right.right, 32);
+        root.right.right.right = fsll.insert(root.right.right.right, 39);
+        root.right.right.right = fsll.insert(root.right.right.right, 40);
+        
+        Node flattenList = fsll.flatten(root); 
+        fsll.print(flattenList); 
+	}
+}
