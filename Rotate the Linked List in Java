@@ -1,0 +1,120 @@
+package javaPrograms;
+
+class Nodee
+{
+	int data;
+	Nodee next;
+	public Nodee(int data)
+	{
+		this.data = data;
+		next = null;
+	}
+}
+
+class LinkedList
+{
+	public Nodee createNewNode(int data)
+	{
+		Nodee temp = new Nodee(data);
+		
+		return temp;
+	}
+	
+	public Nodee insert(int data, Nodee node)
+	{
+		if(node == null)
+		{
+			return createNewNode(data);
+		}
+		else
+		{
+			node.next = insert(data, node.next);
+		}
+		
+		return node;
+	}
+	
+	public void print(Nodee head)
+	{
+		if(head == null)
+		{
+			return;
+		}
+		
+		System.out.println(head.data);
+		print(head.next);
+	}
+	
+	public Nodee rotate(Nodee node, int key)
+	{
+		if(node == null || key < 0)
+		{
+			return node;
+		}
+		
+		int getSizeLL = getSize(node);
+		
+		key = key % getSizeLL;
+		
+		if(key == 0)
+		{
+			return node;
+		}
+		
+		Nodee tmp = node;
+		
+		int i = 1;
+		
+		while(i < getSizeLL - key)
+		{
+			tmp = tmp.next;
+			i++;
+		}
+		
+		Nodee temp = tmp.next;
+		Nodee head = temp;
+		tmp.next = null;
+		
+		while(temp.next != null)
+		{
+			temp = temp.next;
+		}
+		
+		temp.next = node;
+		
+		return head;
+	}
+	
+	public int getSize(Nodee node)
+	{
+		if(node == null)
+		{
+			return 0;
+		}
+		
+		return 1 + getSize(node.next);
+	}
+	
+}
+public class RotateLinkedList
+	{
+		
+	public static void main(String[] args)
+	{
+		Nodee head = null;
+		
+		LinkedList rll = new LinkedList();
+		
+		head = rll.insert(12, head);
+		head = rll.insert(99, head);
+		head = rll.insert(37, head);
+		head = rll.insert(8, head);
+		head = rll.insert(18, head);
+		
+		rll.print(head);
+		
+		head = rll.rotate(head, 3);
+		
+		rll.print(head);
+	}
+}
