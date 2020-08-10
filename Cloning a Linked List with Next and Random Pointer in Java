@@ -1,0 +1,98 @@
+package javaPrograms;
+
+import java.util.HashMap; 
+import java.util.Map; 
+   
+class Nodeq 
+{ 
+    int data; 
+    Nodeq next, random; 
+   
+    public Nodeq(int data) 
+    { 
+        this.data = data; 
+        this.next = this.random = null; 
+    } 
+} 
+
+class LinkedListt 
+{ 
+    Nodeq head;
+  
+    public LinkedListt(Nodeq head) 
+    { 
+        this.head = head; 
+    } 
+  
+    public void push(int data) 
+    { 
+        Nodeq node = new Nodeq(data); 
+        node.next = this.head; 
+        this.head = node; 
+    } 
+  
+    void print() 
+    { 
+        Nodeq temp = head; 
+        while (temp != null) 
+        { 
+            Nodeq random = temp.random; 
+            int randomData = (random != null) ? random.data: -1; 
+            System.out.println("Data = " + temp.data + ", Random data = "+ randomData); 
+            temp = temp.next; 
+        } 
+    } 
+  
+    public LinkedListt clone() 
+    { 
+
+        Nodeq origCurr = this.head, cloneCurr = null; 
+  
+        Map<Nodeq, Nodeq> map = new HashMap<Nodeq, Nodeq>(); 
+  
+        while (origCurr != null) 
+        { 
+            cloneCurr = new Nodeq(origCurr.data); 
+            map.put(origCurr, cloneCurr); 
+            origCurr = origCurr.next; 
+        } 
+  
+        origCurr = this.head; 
+  
+        while (origCurr != null) 
+        { 
+            cloneCurr = map.get(origCurr); 
+            cloneCurr.next = map.get(origCurr.next); 
+            cloneCurr.random = map.get(origCurr.random); 
+            origCurr = origCurr.next; 
+        } 
+  
+        return new LinkedListt(map.get(this.head)); 
+    } 
+} 
+  
+public class CloneLinkedListUsingRandomPointer 
+{ 
+    public static void main(String[] args) 
+    { 
+        
+        LinkedListt list = new LinkedListt(new Nodeq(5)); 
+        list.push(4); 
+        list.push(3); 
+        list.push(2); 
+        list.push(1); 
+  
+        list.head.random = list.head.next.next; 
+        list.head.next.random = list.head.next.next.next; 
+        list.head.next.next.random = list.head.next.next.next.next; 
+        list.head.next.next.next.random = list.head.next.next.next.next.next; 
+        list.head.next.next.next.next.random = list.head.next; 
+  
+        LinkedListt clone = list.clone(); 
+  
+        System.out.println("Original linked list"); 
+        list.print(); 
+        System.out.println("\nCloned linked list"); 
+        clone.print(); 
+    } 
+}
