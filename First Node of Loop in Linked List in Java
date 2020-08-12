@@ -1,0 +1,91 @@
+package javaPrograms;
+
+public class FirstNodeLinkedLists 
+{
+	static class Node
+	{
+		int data;
+		Node next;
+	}
+	
+	public Node insert(int data)
+	{
+		Node temp = new Node();
+		temp.data = data;
+		temp.next = null;
+		
+		return temp;
+	}
+	
+	public void print(Node start)
+	{
+		if(start == null)
+		{
+			return;
+		}
+		
+		System.out.println(start.data);
+		print(start.next);
+	}
+	
+	public Node findFirst(Node head)
+	{
+		Node slow = head;
+		Node fast = head;
+		
+		slow = slow.next;
+		fast = fast.next.next;
+		
+		while(fast != null && fast.next != null)
+		{
+			if(slow == fast)
+			{
+				break;
+			}
+			
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		if(slow != fast)
+		{
+			return null;
+		}
+		
+		slow = head;
+		
+		while(slow != fast)
+		{
+			slow = slow.next;
+			fast = fast.next;
+		}
+		
+		return slow;
+	}
+	
+	public static void main(String[] args)
+	{
+		FirstNodeLinkedLists fnll = new FirstNodeLinkedLists();
+		
+		Node head = fnll.insert(5);
+		head.next = fnll.insert(10);
+		head.next.next = fnll.insert(15);
+		head.next.next.next = fnll.insert(20);
+		head.next.next.next.next = fnll.insert(25);
+		
+		//Loop:
+		head.next.next.next.next.next = head.next.next;
+		
+		Node firstNode = fnll.findFirst(head);
+		
+		if(firstNode == null)
+		{
+			System.out.println("Loop doesn't exist");
+		}
+		
+		else
+		{
+			System.out.println("Starting node of the loop  is: " + firstNode.data);
+		}
+	}
+}
