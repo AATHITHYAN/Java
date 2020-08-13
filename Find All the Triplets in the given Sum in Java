@@ -1,0 +1,115 @@
+package javaPrograms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class ThreeSum
+{
+	public List<Integer[]> calculate(int array[], int target)
+	{
+		/*Method : 1 - Time Complexity - O(n3)
+		
+		int i, j, k;
+		List<Integer[]> list = new ArrayList<>();
+		
+		for(i = 0; i < array.length; i++)
+		{
+			for(j = i + 1; j < array.length; j++)
+			{
+				for(k = j + 1; k < array.length; k++)
+				{
+					if(array[i] + array[j] + array[k] == target)
+					{
+						list.add(new Integer[] { array[i], array[j], array[k] });
+					}
+				}
+			}
+		}
+		return list;
+		
+		*/
+		
+		/*Method : 2 - Time Complexity - O(n2)
+		
+		List<Integer[]> list = new ArrayList<>();
+		
+		Arrays.sort(array);
+		
+		int first, last;
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			first = i + 1;
+			last = array.length - 1;
+			
+			while(first < last)
+			{
+				int value = array[i] + array[first] + array[last];
+				if(value == target)
+				{
+					list.add(new Integer[] { array[i], array[first], array[last] });
+					last--;
+					first++;
+				}
+				
+					else if(value < target)
+					{
+						first++;
+					}
+					else
+					{
+						last--;
+					}
+			}
+		}
+		return list;
+		*/
+		
+		//Method : 3 - Time Complexity - O(n2)
+		
+		List<Integer[]> result = new ArrayList<>();
+		int subtract;
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			subtract = target - array[i];
+			
+			Set<Integer> existed = new HashSet<>();
+			
+			for(int j = i + 1; j < array.length; j++)
+			{
+				if(existed.contains(subtract - array[j]))
+				{
+					result.add(new Integer[] { array[i], array[j], subtract - array[j]} );
+				}
+				else
+				{
+					existed.add(array[j]);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static void main(String[] args) 
+	{
+		ThreeSum ts = new ThreeSum();
+		int array[] = {7, 12, 3, 1, 2, -6, 5, -8, 6};
+		int target = 0;
+		
+		List<Integer[]> result = ts.calculate(array, target);
+		
+		for(Integer[] arr: result)
+		{
+			for(Integer ar: arr)
+			{
+				System.out.print(ar + " ");
+			}
+			System.out.println();
+		}
+	}
+
+}
