@@ -1,0 +1,66 @@
+package javaPrograms;
+
+public class TrappingRainWater 
+{
+	public static int findMax(int number1, int number2)
+	{
+		if(number1 > number2)
+		{
+			return number1;
+		}
+		else
+		{
+			return number2;
+		}
+	}
+	
+	public static int findMin(int number1, int number2)
+	{
+		if(number1 < number2)
+		{
+			return number1;
+		}
+		else
+		{
+			return number2;
+		}
+	}
+	
+	public static int calculate(int array[], int size)
+	{
+		int total = 0;
+		int left[] = new int[size];
+		int right[] = new int[size];
+		
+		left[0] = array[0];
+		right[size - 1] = array[size - 1];
+		
+		for(int i = 1; i < size; i++)
+		{
+			left[i] = findMax(left[i - 1], array[i]);
+		}
+		
+		for(int j = size - 2; j >= 0; j--)
+		{
+			right[j] = findMax(right[j + 1], array[j]);
+		}
+		
+		for(int i = 0; i < size; i++)
+		{
+			total += findMin(left[i], right[i]) - array[i];
+		}
+		
+		return total;
+	}
+	
+	public static void main(String[] args) 
+	{
+		int array[] = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+		
+		int size = array.length;
+		
+		int totalWater = calculate(array, size);
+		
+		System.out.println(totalWater);
+	}
+}
