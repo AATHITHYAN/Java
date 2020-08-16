@@ -1,0 +1,48 @@
+package javaPrograms;
+
+public class MaximumConsecutive1BinaryArray 
+{
+	public static int max(int number1, int number2)
+	{
+		if(number1 > number2)
+		{
+			return number1;
+		}
+		else
+		{
+			return number2;
+		}
+	}
+	
+	public static int calculate(int array[], int size)
+	{
+		int count = 0, result = 0;
+		
+		for(int i = 0; i < size; i++)
+		{
+			if(array[i] == 0)
+			{
+				count = 0;
+			}
+			
+			else
+			{
+				count++;
+				result = max(count, result);
+			}
+		}
+		
+		return result;
+	}
+	
+	public static void main(String[] args) 
+	{
+		int array[] = {0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1};
+		
+		int size = array.length;
+		
+		int result = calculate(array, size);
+		
+		System.out.println(result);
+	}
+}
