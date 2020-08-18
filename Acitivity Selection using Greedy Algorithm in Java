@@ -1,0 +1,63 @@
+package javaPrograms;
+
+import java.util.Scanner;
+
+public class ActiveSelectionGreedyAlgorithm 
+{
+	public static void activitySelection(int start[], int finish[], int size)
+	{
+		int i = 0;
+		
+		System.out.print(i + " ");
+		
+		for(int j = 1; j < size; j++)
+		{
+			if(start[j] >= finish[i])
+			{
+				System.out.print(j + " ");
+				i = j;
+			}
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		int size = sc.nextInt();
+		
+		int start[] = new int[size];
+		int finish[] = new int[size];
+		
+		for(int i = 0; i < size; i++)
+		{
+			start[i] = sc.nextInt();
+		}
+		
+		for(int i = 0; i < size; i++)
+		{
+			finish[i] = sc.nextInt();
+		}
+		
+		sc.close();
+		
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = i + 1; j < size; j++)
+			{
+				if(finish[i] > finish[j])
+				{
+					int temp = finish[i];
+					finish[i] = finish[j];
+					finish[j] = temp;
+					
+					int temp1 = start[i];
+					start[i] = start[j];
+					start[j] = temp1;
+				}
+			}
+		}
+		
+		activitySelection(start, finish, size);
+	}
+}
