@@ -1,0 +1,38 @@
+package javaPrograms;
+
+import java.util.Enumeration;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class MinimumNoOfCoinsGreedyAlgorithm 
+{
+	static int denomination[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 2000};
+	static int size = denomination.length;
+	public static void calculate(int value)
+	{
+		
+		Vector<Integer> vec = new Vector<>();
+		
+		for(int i = size - 1; i >= 0; i--)
+		{
+			while( value >= denomination[i])
+			{
+				value -= denomination[i];
+				vec.add(denomination[i]);
+			}
+		}
+		
+		for (int i = 0; i < vec.size(); i++) 
+        { 
+            System.out.print(" " + vec.elementAt(i)); 
+        }
+	}
+	
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		int value = sc.nextInt();
+		sc.close();
+		calculate(value);	
+	}
+}
