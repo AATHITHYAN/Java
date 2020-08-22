@@ -1,0 +1,74 @@
+package javaPrograms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class JobSequencingGreedyAlgorithm 
+{
+	static class Job implements Comparable<Job>
+	{
+		char id;
+		int deadLine;
+		int profit;
+		
+		public Job(char id, int deadLine, int profit)
+		{
+			this.id = id;
+			this.deadLine = deadLine;
+			this.profit = profit;
+		}
+
+		@Override
+		public int compareTo(Job o) {
+			return o.profit - this.profit;
+		}
+	}
+	
+	private void print(ArrayList<Job> jobs, int size)
+	{
+		Boolean slots[] = new Boolean[size];
+		
+		Arrays.fill(slots, false);
+		
+		int results[] = new int[size];
+		
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = jobs.get(i).deadLine - 1; j >= 0; j--)
+			{
+				if(!slots[j])
+				{
+					results[j] = i;
+					slots[j] = true;
+					break;
+				}
+			}
+		}
+		
+		for(int i = 0; i < jobs.size(); i++)
+		{
+			if(slots[i])
+			{
+				System.out.println(jobs.get(results[i]).id );
+			}
+		}
+	}
+
+	public static void main(String[] args)
+	{
+		JobSequencingGreedyAlgorithm jobs = new JobSequencingGreedyAlgorithm();
+		
+		ArrayList<Job> list = new ArrayList<>();
+		
+		list.add(new Job('a', 2, 100));
+		list.add(new Job('b', 1, 19));
+        list.add(new Job('c', 2, 27));
+        list.add(new Job('d', 1, 25));
+        list.add(new Job('e', 3, 15));
+        
+        Collections.sort(list);
+        
+        jobs.print(list, list.size());   
+	}
+}
