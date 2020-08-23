@@ -1,0 +1,88 @@
+package javaPrograms;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Nqueen
+{
+	static int size;
+	static int array[][] = new int[100][100];
+	
+	public static boolean attack(int i, int j)
+	{
+		for(int k = 0; k < size; k++)
+		{
+			if((array[i][k] == 1) || (array[k][j] == 1))
+			{
+				return true;
+			}
+		}
+		
+		for(int k = 0; k < size; k++)
+		{
+			for(int l = 0; l < size; l++)
+			{
+				if(((k+l) == (i+j)) || ((k-l) == (i-j)))
+				{
+					if(array[k][l] == 1)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean calculate(int n)
+	{
+		if(n == 0)
+		{
+			return true;
+		}
+		
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				if((!attack(i, j)) && (array[i][j] != 1))
+				{
+					array[i][j] = 1;
+					
+					if(calculate(n - 1) == true)
+					{
+						return true;
+					}
+					
+					array[i][j] = 0;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public static void print()
+	{
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				System.out.print(array[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void main(String[] args) throws NumberFormatException, IOException 
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		size = Integer.parseInt(br.readLine());
+		
+		calculate(size);
+		
+		print();
+	}
+}
