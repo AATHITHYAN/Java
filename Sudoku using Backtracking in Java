@@ -1,0 +1,129 @@
+package javaPrograms;
+
+public class SudokuBackTracking 
+{
+	public static boolean isSafe(int table[][], int row, int col, int num)
+	{
+		for(int j = 0; j < table.length; j++)
+		{
+			if(table[row][j] == num)
+			{
+				return false;
+			}
+		}
+		
+		for(int i = 0; i < table.length; i++)
+		{
+			if(table[i][col] == num)
+			{
+				return false;
+			}
+		}
+		
+		int squareRoot = (int)Math.sqrt(table.length);
+		
+		int rowStart = row - row % squareRoot;
+		int colStart = col - col % squareRoot;
+		
+		for(int i = rowStart; i < rowStart + squareRoot; i++)
+		{
+			for(int j = colStart; j < colStart + squareRoot; j++)
+			{
+				if(table[i][j] == num)
+				{
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public static boolean sudokuGenerate(int table[][], int Length)
+	{
+		int row = -1;
+		int col = -1;
+		
+		boolean isEmpty = true;
+		
+		for(int i = 0; i < Length; i++)
+		{
+			for(int j = 0; j < Length; j++)
+			{
+				if(table[i][j] == 0)
+				{
+					row = i;
+					col = j;
+					
+					isEmpty = false;
+					break;
+				}
+			}
+			if(!isEmpty)
+			{
+				break;
+			}
+		}
+		
+		if(isEmpty)
+		{
+			return true;
+		}
+		
+		for(int num = 1; num <= Length; num++)
+		{
+			if( isSafe(table, row, col, num))
+			{
+				table[row][col] = num;
+			
+				if(sudokuGenerate(table, Length))
+				{
+					return true;
+				}
+				else
+				{  	
+					table[row][col] = 0;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	public static void print(int table[][], int Length)
+	{
+		for(int i = 0; i < Length; i++)
+		{
+			for(int j = 0; j < Length; j++)
+			{
+				System.out.print(table[i][j]);
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		int table[][] = new int[][] { {3, 0, 6, 5, 0, 8, 4, 0, 0}, 
+	         {5, 2, 0, 0, 0, 0, 0, 0, 0}, 
+	         {0, 8, 7, 0, 0, 0, 0, 3, 1}, 
+	         {0, 0, 3, 0, 1, 0, 0, 8, 0}, 
+	         {9, 0, 0, 8, 6, 3, 0, 0, 5}, 
+	         {0, 5, 0, 0, 9, 0, 6, 0, 0}, 
+	         {1, 3, 0, 0, 0, 0, 2, 5, 0}, 
+	         {0, 0, 0, 0, 0, 0, 0, 7, 4}, 
+	         {0, 0, 5, 2, 0, 6, 3, 0, 0} };
+									 
+		int Length = table.length;
+		
+		if(sudokuGenerate(table, Length))
+		{
+			print(table, Length);
+		}
+		else
+		{
+			System.out.println("No solution exist");
+		}
+	}
+}
