@@ -1,0 +1,78 @@
+package javaPrograms;
+
+public class RatInAMazeBacktracking 
+{
+	static int size;
+	
+	public static void print(int result[][])
+	{
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				System.out.print(result[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	public static boolean isValid(int maze[][], int x, int y)
+	{
+		return (x >= 0 && y >= 0 && x < size && y < size && maze[x][y] == 1);
+	}
+	
+	public static boolean calculate(int maze[][])
+	{
+		int result[][] = new int[size][size];
+		
+		if(calculateFurther(maze, 0, 0, result)==false)
+		{
+			System.out.println("The solution not exist");
+			return false;
+		}
+		
+		print(result);
+		return true;
+	}
+	
+	public static boolean calculateFurther(int maze[][], int x, int y, int result[][])
+	{
+		if(x == size - 1 && y == size - 1 && maze[x][y] == 1)
+		{
+			result[x][y] = 1;
+			return true;
+		}
+		
+		if(isValid(maze, x, y) == true)
+		{
+			result[x][y] = 1;
+			
+			if(calculateFurther(maze, x + 1, y, result))
+			{
+				return true;
+			}
+			
+			if(calculateFurther(maze, x, y + 1, result))
+			{
+				return true;
+			}
+			
+			result[x][y] = 0;
+			return false;
+		}
+		
+		return false;
+	}
+	
+	public static void main(String[] args) 
+	{
+		int maze[][] = { { 1, 0, 0, 0 }, 
+                	     { 1, 1, 0, 1 }, 
+                	     { 0, 1, 0, 0 }, 
+                	     { 1, 1, 1, 1 } };
+		
+		size = maze.length;
+		
+		calculate(maze);
+	}
+}
