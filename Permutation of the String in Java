@@ -1,0 +1,41 @@
+package javaPrograms;
+
+public class PermutationStringBacktracking
+{
+	public static String swap(String str, int temp1, int temp2)
+	{
+		char temp[] = str.toCharArray();
+		char ch;
+		
+		ch = temp[temp1];
+		temp[temp1] = temp[temp2];
+		temp[temp2] = ch;
+		
+		return String.valueOf(temp);
+	}
+	
+	public static void permute(String str, int left, int right)
+	{
+		if(left == right - 1)
+		{
+			System.out.println(str);
+		}
+		
+		else
+		{
+			for(int i = left; i < right; i++)
+			{
+				str = swap(str, left, i);
+				permute(str, left + 1, right);
+				str = swap(str, left, i);
+			}
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		String str = "abc";
+		
+		permute(str, 0, str.length());	
+	}
+}
