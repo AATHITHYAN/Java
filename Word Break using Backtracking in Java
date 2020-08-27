@@ -1,0 +1,79 @@
+package javaPrograms;
+
+import java.util.HashSet;
+
+public class WordBreakBacktracking 
+{
+	public void wordCheck(String str, HashSet<String> set)
+	{
+		if(find(str, set, ""))
+		{
+			System.out.println(str);
+		}
+		
+		else
+		{
+			System.out.println("We can't break the word");
+		}
+	}
+	
+	public boolean find(String str, HashSet<String> set, String result)
+	{
+		if(str.length() == 0)
+		{
+			System.out.println(result);
+			return true;
+		}
+		
+		else
+		{
+			int index = 0;
+			String word = "";
+			
+			while(index < str.length())
+			{
+				word += str.charAt(index);
+				
+				if(set.contains(word))
+				{
+					if(find(str.substring(index + 1), set, result + word + " "))
+					{
+						return true;
+					}
+					
+					else
+					{
+						index++;
+					}
+				}
+				
+				else
+				{
+					index++;
+				}
+			}
+			
+			return false;
+		}
+	}
+
+	public static void main(String[] args) 
+	{
+		WordBreakBacktracking wbb = new WordBreakBacktracking();
+		
+		HashSet<String> set = new HashSet<>();
+		
+		set.add("I");
+		set.add("want");
+		set.add("to");
+		set.add("be");
+		set.add("a");
+		set.add("software");
+		set.add("developer");
+		
+		String str = "Iwanttobeasoftwaredeveloper";
+		
+		wbb.wordCheck(str, set);
+	}
+
+}
