@@ -1,0 +1,68 @@
+package javaPrograms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class CombinationSum 
+{
+	public void calculate(int numbers[], int target)
+	{
+		Arrays.sort(numbers);
+		
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		
+		List<Integer> list = new ArrayList<>();
+		
+		backtrack(result, list, numbers, target, 0);
+		
+		for(List<Integer> n: result)
+		{
+			System.out.println(n);
+		}
+	}
+	
+	public void backtrack (List<List<Integer>> result, List<Integer> list, int numbers[], int target, int position)
+	{
+		int sum = 0;
+		
+		for(int temp : list)
+		{
+			sum += temp;
+		}
+		
+		if(sum == target)
+		{
+			result.add(new ArrayList<Integer>(list));
+			return;
+		}
+		
+		if(sum < target)
+		{
+			for(int i = position; i < numbers.length; i++)
+			{
+				if(i != position && numbers[i] == numbers[i - 1])
+				{
+					continue;
+				}
+				
+				list.add(numbers[i]);
+				backtrack(result, list, numbers, target, i + 1);
+				list.remove(list.size() - 1 );
+			}
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		CombinationSum cs = new CombinationSum();
+		
+		int numbers[] = {10 , 1 , 2, 7, 6, 1, 5};
+		
+		int target = 8;
+		
+		cs.calculate(numbers, target);
+		
+	}
+
+}
