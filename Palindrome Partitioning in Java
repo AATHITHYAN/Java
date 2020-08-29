@@ -1,0 +1,70 @@
+package Programs;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PalindromePartitioning 
+{
+	public void partition(String str)
+	{
+		List<List<String>> result = new ArrayList<>();
+		List<String> list = new ArrayList<>();
+		
+		if(str.length() == 0)
+		{
+			System.out.println(result);
+		}
+		
+		helper(result, list, str, 0);
+		
+		for(List<String> s: result)
+		{
+			System.out.println(s);
+		}
+	}
+	
+	public void helper(List<List<String>> result, List<String> list, String str, int low)
+	{
+		if(low == str.length())
+		{
+			result.add(new ArrayList<>(list));
+			return;
+		}
+		
+		int n = str.length();
+		
+		for(int high = low; high < n; high++)
+		{
+			if(isPal(str, low, high))
+			{
+				list.add(str.substring(low, high + 1));
+				helper(result, list, str, high + 1);
+				list.remove(list.size() - 1);
+			}
+		}
+	}
+	
+	public boolean isPal(String str, int low, int high)
+	{
+		while(low <= high)
+		{
+			if(str.charAt(low) != str.charAt(high))
+			{
+				return false;
+			}
+			low++;
+			high--;
+		}
+		return true;
+	}
+	
+	public static void main(String[] args)
+	{
+		PalindromePartitioning pp = new PalindromePartitioning();
+		
+		String str = "aab";
+		 
+		pp.partition(str);
+	}
+
+}
