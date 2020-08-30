@@ -1,6 +1,6 @@
 package Programs;
 
-public class SubsetSumBacktracking
+public class SubsetSum
 {
 	static int count = 0;
 	
