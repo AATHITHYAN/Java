@@ -1,0 +1,45 @@
+package Programs;
+
+public class NthRootBinarySearchDivideAndConquer {
+
+	public static void calculate(double number, int n)
+	{
+		double low, high;
+		
+		if(number >= 0 && number <= 1)
+		{
+			low = number;
+			high = 1;
+		}
+		else
+		{
+			low = 1;
+			high = number;
+		}
+		
+		double epsilon = 0.0000001;
+		
+		double value = (low + high) / 2;
+		
+		while(Math.abs((Math.pow(value, n)) - number) >= epsilon)
+		{
+			if(Math.pow(value, n) > number)
+			{
+				high = value;
+			}
+			else
+			{
+				low = value;
+			}
+			value = (low + high) / 2;
+		}
+		System.out.println(value);
+	}
+	
+	public static void main(String[] args) {
+		double number = 5;
+		int n = 2;
+		calculate(number, n);
+	}
+
+}
