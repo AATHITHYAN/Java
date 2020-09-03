@@ -1,0 +1,53 @@
+package Programs;
+
+public class FindElementAppearsOnceSortedArray {
+
+	public static void calculate(int array[], int low, int high)
+	{
+		if(low > high)
+		{
+			return;
+		}
+		
+		if(low == high)
+		{
+			System.out.println(array[low]);
+			
+			return;
+		}
+		
+		int mid = (low + high) / 2;
+		
+		if(mid % 2 == 0)
+		{
+			if(array[mid] == array[mid + 1])
+			{
+				calculate(array, mid + 2, high);
+			}
+			else
+			{
+				calculate(array, low, mid);
+			}
+		}
+		
+		else if(mid % 2 == 1)
+		{
+			if(array[mid] == array[mid - 1])
+			{
+				calculate(array, mid + 1, high);
+			}
+			else
+			{
+				calculate(array, low, mid - 1 );
+			}
+		}
+	}
+	public static void main(String[] args) {
+		
+		int array[] = {1, 1, 2, 2, 4, 5, 5, 6, 6};
+		
+		calculate(array, 0, array.length - 1);
+
+	}
+
+}
