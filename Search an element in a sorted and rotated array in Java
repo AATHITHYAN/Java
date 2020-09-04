@@ -1,0 +1,55 @@
+package Programs;
+
+public class SearchInSortedAndRotatedArray {
+
+	public static int calculate(int array[], int low, int high, int key)
+	{
+		if(low > high)
+		{
+			return -1;
+		}
+		
+		int mid = (low + high) / 2;
+		
+		if(array[mid] == key)
+		{
+			return mid;
+		}
+		
+		if(array[low] <= array[mid])
+		{
+			if(key >= array[low] && key <= array[mid])
+			{
+				return calculate(array, low, mid - 1, key);
+			}
+			return calculate(array, mid + 1, high, key);
+		}
+		
+		if(key >= array[mid] && key <= array[high])
+		{
+			return calculate(array, mid + 1, high, key);
+		}
+		
+		return calculate(array, low, mid - 1, key);
+	}
+	
+	public static void main(String[] args) {
+		int array[] = {4, 5, 6, 7, 8, 9, 1, 2, 3};
+		
+		int size = array.length;
+		
+		int key = 3;
+		
+		int i = calculate(array, 0, size - 1, key);
+		
+		if(i != -1)
+		{
+			System.out.println(i);
+		}
+		else
+		{
+			System.out.println("Key not found");
+		}
+	}
+
+}
