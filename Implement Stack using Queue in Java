@@ -1,0 +1,77 @@
+package Programs;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ImplementStackUsingQueue {
+	
+	static Queue<Integer> queue1 = new LinkedList<>();
+	static Queue<Integer> queue2 = new LinkedList<>();
+	
+	static int currentSize;
+	
+	public ImplementStackUsingQueue()
+	{
+		currentSize = 0;
+	}
+	
+	public void push(int number)
+	{
+		currentSize++;
+		
+		queue2.add(number);
+		
+		while(!queue1.isEmpty())
+		{
+			queue2.add(queue1.peek());
+			queue1.remove();
+		}
+		
+		Queue<Integer> queue = queue1;
+		queue1 = queue2;
+		queue2 = queue;
+	}
+	
+	int size()
+	{
+		return currentSize;
+	}
+	
+	int top()
+	{
+		if(queue1.isEmpty())
+		{
+			return -1;
+		}
+		return queue1.peek();
+	}
+	
+	void pop()
+	{
+		if(queue1.isEmpty())
+		{
+			return;
+		}
+		queue1.remove();
+		currentSize--;
+	}
+	
+	public static void main(String[] args) {
+		ImplementStackUsingQueue isuq = new ImplementStackUsingQueue();
+		
+		isuq.push(1);
+		isuq.push(2);
+		isuq.push(3);
+		
+		System.out.println("Current Size: " + isuq.size());
+		
+		System.out.println(isuq.top());
+		
+		isuq.pop();
+		
+		System.out.println(isuq.top());
+		
+		System.out.println(isuq.size());
+	}
+
+}
