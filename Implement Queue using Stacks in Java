@@ -1,0 +1,50 @@
+package Programs;
+
+import java.util.Stack;
+
+public class QueueUsingStack {
+	
+	Stack<Integer> stack1 = new Stack<>();
+	Stack<Integer> stack2 = new Stack<>();
+	
+	public void enQueue(int number)
+	{
+		while(!stack1.isEmpty())
+		{
+			stack2.push(stack1.pop());
+		}
+		
+		stack1.push(number);
+		
+		while(!stack2.isEmpty())
+		{
+			stack1.push(stack2.pop());
+		}
+	}
+	
+	public int deQueue()
+	{
+		if(stack1.isEmpty())
+		{
+			System.out.println("Queue is Empty");
+			System.out.println(0);
+		}
+		
+		int number = stack1.peek();
+		stack1.pop();
+		return number;
+	}
+	
+	public static void main(String[] args) {
+		QueueUsingStack qus = new QueueUsingStack();
+		
+		qus.enQueue(1);
+		qus.enQueue(2);
+		qus.enQueue(3);
+		
+		System.out.println(qus.deQueue());
+		System.out.println(qus.deQueue());
+		System.out.println(qus.deQueue());
+	}
+
+}
