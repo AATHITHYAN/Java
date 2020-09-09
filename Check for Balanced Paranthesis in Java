@@ -1,0 +1,81 @@
+package Programs;
+
+import java.beans.Expression;
+import java.util.Stack;
+
+public class BalancedParanthesis {
+
+	public boolean calculate(String expression)
+	{
+		Stack<Character> stack = new Stack<>();
+		
+		int size = expression.length();
+		
+		for(int i = 0; i < size; i++)
+		{
+			char currentExpression = expression.charAt(i);
+			
+			if(currentExpression == '(' || currentExpression == '[' || currentExpression == '{')
+			{
+				stack.push(currentExpression);
+			}
+			
+			if(stack.isEmpty())
+			{
+				return false;
+			}
+			
+			switch(currentExpression)
+			{
+				case ')':
+				{
+					stack.pop();
+					if(currentExpression == '{' || currentExpression == '[')
+					{
+						return false;
+					}
+					break;
+				}
+				
+				case '}':
+				{
+					stack.pop();
+					if(currentExpression == '(' || currentExpression == '[')
+					{
+						return false;
+					}
+					break;
+				}
+				
+				case ']':
+				{
+					stack.pop();
+					if(currentExpression == '{' || currentExpression == '(')
+					{
+						return false;
+					}
+					break;
+				}
+			}
+		}
+		
+		return (stack.isEmpty());
+	}
+	
+	public static void main(String[] args) 
+	{
+		BalancedParanthesis bp = new BalancedParanthesis();
+		
+		String expression = "([{}])";
+		
+		if(bp.calculate(expression))
+		{
+			System.out.println("Balanced ");
+		}
+		else
+		{
+			System.out.println("Not Balanced");
+		}
+	}
+
+}
