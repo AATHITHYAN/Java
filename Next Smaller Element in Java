@@ -1,0 +1,53 @@
+package Programs;
+
+import java.util.HashMap;
+import java.util.Stack;
+
+public class NextSmallerElement
+{
+	public void calculate(int array[], int size)
+	{
+		Stack<Integer> stack = new Stack<>();
+		HashMap<Integer, Integer> map = new HashMap<>();
+		
+		stack.push(array[0]);
+		
+		for(int i = 1; i < size; i++)
+		{
+			if(stack.empty())
+			{
+				stack.push(array[i]);
+				continue;
+			}
+			
+			while(stack.empty() == false && stack.peek() > array[i])
+			{
+				map.put(stack.peek(), array[i]);
+				stack.pop();
+			}
+			stack.push(array[i]);
+		}
+		
+		while(stack.empty() == false)
+		{
+			map.put(stack.peek(), -1);
+			stack.pop();
+		}
+		
+		for(int i  = 0; i < size; i++)
+		{
+			System.out.println(array[i] + " - " + map.get(array[i]));
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		NextSmallerElement nse = new NextSmallerElement();
+		
+		int array[] = {11, 13, 21, 3};
+		int size = array.length;
+		
+		nse.calculate(array, size);
+	}
+
+}
