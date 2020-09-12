@@ -1,0 +1,70 @@
+package Programs;
+
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
+
+public class LRU_Cache 
+{
+	Deque<Integer> doubleQueue;
+	
+	HashSet<Integer> hashSet;
+	
+	int cacheSize;
+	
+	public LRU_Cache(int capacity)
+	{
+		doubleQueue = new LinkedList<>();
+		hashSet = new HashSet<>();
+		cacheSize = capacity;
+	}
+	
+	public void calculate(int page)
+	{
+		if(!hashSet.contains(page))
+		{
+			if(doubleQueue.size() == cacheSize)
+			{
+				int last = doubleQueue.removeLast();
+				hashSet.remove(last);
+			}
+		}
+		else
+		{
+			doubleQueue.remove(page);
+		}
+		
+		doubleQueue.push(page);
+		hashSet.add(page);
+	}
+	
+	public void display()
+	{
+		Iterator<Integer> itr  = doubleQueue.iterator();
+		
+		while(itr.hasNext())
+		{
+			System.out.println(itr.next() + " ");
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		LRU_Cache cache = new LRU_Cache(4);
+		
+		cache.calculate(1);
+		cache.calculate(2);
+		cache.calculate(3);
+		cache.calculate(1);
+		cache.calculate(4);
+		cache.calculate(5);
+		cache.calculate(2);
+		cache.calculate(2);
+		cache.calculate(1);
+		
+		cache.display();
+	}
+
+}
