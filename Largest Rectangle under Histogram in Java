@@ -1,0 +1,59 @@
+package Programs;
+
+import java.util.Stack;
+
+public class LargestRectangleHistogram
+{
+	public int calculate(int array[], int size)
+	{
+		Stack<Integer> stack = new Stack<>();
+		
+		int result = 0;
+		int top, area, i = 0;
+		
+		while(i < size)
+		{
+			if(stack.empty() || array[stack.peek()] <= array[i])
+			{
+				stack.push(i++);
+			}
+			else
+			{
+				top = stack.peek();
+				stack.pop();
+				
+				area = array[top] * (stack.empty() ? i : i - stack.peek() - 1);
+				
+				if(result < area)
+				{
+					result = area;
+				}
+			}
+		}
+		
+		while(stack.empty() == false)
+		{
+			top = stack.peek();
+			stack.pop();
+			area = array[top] * (stack.empty() ? i : i - stack.peek() - 1);
+				
+			if(result < area)
+			{
+				result = area;
+			}
+		}
+		return result;
+	}
+
+	public static void main(String[] args)
+	{
+		LargestRectangleHistogram lrh = new LargestRectangleHistogram();
+		
+		int array[] = {6, 2, 5, 4, 5, 1, 6};
+		
+		int size = array.length;
+		
+		System.out.println(lrh.calculate(array, size));
+	}
+
+}
