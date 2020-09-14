@@ -1,0 +1,54 @@
+package Programs;
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class SlidingWindowMaximum 
+{
+	public void calculate(int array[], int count)
+	{
+		Deque<Integer> dequeList = new LinkedList<>();
+		
+		int i;
+		
+		for(i = 0; i < count; i++)
+		{
+			while(!dequeList.isEmpty() && array[i] >= array[dequeList.peekLast()])
+			{
+				dequeList.removeLast();
+			}
+			
+			dequeList.add(i);
+		}
+		
+		for(; i < array.length; i++)
+		{
+			System.out.println(array[dequeList.peek()] + " ");
+			
+			while((!dequeList.isEmpty() && dequeList.peek() <= i - count))
+			{
+				dequeList.removeFirst();
+			}
+			
+			while((!dequeList.isEmpty() && array[i] >= array[dequeList.peekLast()]))
+			{
+				dequeList.removeLast();
+			}
+			
+			dequeList.addLast(i);
+		}
+		
+		System.out.println(array[dequeList.peek()]);
+	}
+	
+	public static void main(String[] args) 
+	{
+		SlidingWindowMaximum swm = new SlidingWindowMaximum();
+		
+		int array[] = {12, 1, 78, 90, 57, 89, 56};
+		int count = 3;
+		
+		swm.calculate(array, count);
+	}
+
+}
