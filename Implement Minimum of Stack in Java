@@ -1,0 +1,106 @@
+package Programs;
+
+import java.util.Stack;
+
+public class ImplementMinStack 
+{
+	Stack<Integer> stack = new Stack<>();
+	
+	int minElement;
+	
+	public void push(int number)
+	{
+		if(stack.isEmpty())
+		{
+			minElement = number;
+			stack.push(number);
+			System.out.println("Number Inserted: " + number);
+			return;
+		}
+		if(number < minElement)
+		{
+			stack.push(2 * number - minElement);
+			minElement = number;
+		}
+		else
+		{
+			stack.push(number);
+		}
+		
+		System.out.println("Number inserted into Stack: " + number);
+	}
+	
+	public void getMinimum()
+	{
+		if(stack.isEmpty())
+		{
+			System.out.println("Stack is empty");
+		}
+		else
+		{
+			System.out.println("Minimum Element in the stack is : " + minElement);
+		}
+	}
+	
+	public void pop()
+	{
+		if(stack.isEmpty())
+		{
+			System.out.println("Stack is empty");
+			return;
+		}
+		
+		System.out.println("Top Most element removed: ");
+		int temp = stack.pop();
+		
+		if(temp < minElement)
+		{
+			System.out.println(minElement);
+			minElement = 2*minElement - temp;
+		}
+		else
+		{
+			System.out.println(temp);
+		}
+		
+	}
+	
+	public void peek()
+	{
+		if(stack.isEmpty())
+		{
+			System.out.println("Stack is empty");
+			return;
+		}
+		
+		int temp = stack.peek();
+		
+		System.out.println("Top most Element is: ");
+		
+		if(temp < minElement)
+		{
+			System.out.println(minElement);
+		}
+		else
+		{
+			System.out.println(temp);
+		}
+	}
+
+	public static void main(String[] args) 
+	{
+		ImplementMinStack ims = new ImplementMinStack();
+		
+		ims.push(3);
+		ims.push(5);
+		ims.getMinimum();
+		ims.push(2);
+		ims.push(1);
+		ims.getMinimum();
+		ims.pop();
+		ims.getMinimum();
+		ims.pop();
+		ims.peek();
+	}
+
+}
