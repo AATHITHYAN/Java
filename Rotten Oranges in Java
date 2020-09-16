@@ -1,0 +1,87 @@
+package Programs;
+
+public class RottenOranges 
+{
+	static int row = 3;
+	static int col = 5;
+	
+	public boolean isSafe(int i, int j)
+	{
+		if(i >= 0 && i < row && j >= 0 && j < col)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public int calculate(int array[][])
+	{
+		boolean rotten = false;
+		int count = 2;
+		
+		while(true)
+		{
+			for(int i = 0; i < row; i++)
+			{
+				for(int j = 0; j < col; j++)
+				{
+					if(array[i][j] == count)
+					{
+						if(isSafe(i + 1, j) && array[i + 1][j] == 1)
+						{
+							array[i + 1][j] = array[i][j] + 1;
+							rotten = true;
+						}
+						if(isSafe(i, j + 1) && array[i][j + 1] == 1)
+						{
+							array[i][j + 1] = array[i][j] + 1;
+							rotten = true;
+						}
+						if(isSafe(i - 1, j) && array[i - 1][j] == 1)
+						{
+							array[i - 1][j] = array[i][j] + 1;
+							rotten = true;
+						}
+						if(isSafe(i, j - 1) && array[i][j - 1] == 1)
+						{
+							array[i][j - 1] = array[i][j] + 1;
+							rotten = true;
+						}
+					}
+				}
+			}
+			
+			if(!rotten)
+			{
+				break;
+			}
+			rotten = false;
+			count++;
+		}
+	
+		for(int i = 0; i < row; i++)
+		{
+			for(int j = 0; j < col; j++)
+			{
+				if(array[i][j] == 1)
+				{
+					return -1;
+				}
+			}
+		}
+	
+		return count - 2;
+	}
+	
+	public static void main(String[] args) 
+	{
+		RottenOranges ro = new RottenOranges();
+		
+		int array[][] = { {2, 1, 0, 2, 1},
+				{1, 0, 1, 2, 1},
+				{1, 0, 0, 2, 1} };
+		
+		System.out.println(ro.calculate(array));
+	}
+
+}
