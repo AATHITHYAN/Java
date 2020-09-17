@@ -1,0 +1,60 @@
+package Programs;
+
+import java.util.Stack;
+
+public class InorderTraversal 
+{
+	Node root;
+	
+	static class Node
+	{
+		int data;
+		Node left, right;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			left = right = null;
+		}
+	}
+	
+	public void inOrder()
+	{
+		if(root == null)
+		{
+			return;
+		}
+		
+		Stack<Node> stack = new Stack<>();
+		Node current = root;
+		
+		while(current != null || stack.size() > 0)
+		{
+			while(current != null)
+			{
+				stack.push(current);
+				current = current.left;
+			}
+			
+			current = stack.pop();
+			
+			System.out.println(current.data + " ");
+			
+			current = current.right;
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		InorderTraversal ot = new InorderTraversal();
+		ot.root = new Node(1);
+		ot.root.left = new Node(2);
+		ot.root.right = new Node(3);
+		ot.root.left.left = new Node(4);
+		ot.root.left.right = new Node(5);
+		
+		ot.inOrder();
+		
+	}
+
+}
