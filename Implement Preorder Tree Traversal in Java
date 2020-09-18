@@ -1,0 +1,73 @@
+package Programs;
+
+import java.util.Stack;
+
+public class PreorderTraversal 
+{
+	Node root;
+	
+	static class Node
+	{
+		int data;
+		Node left, right;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			left = right = null;
+		}
+	}
+	
+	public void preOrder()
+	{
+		preOrder(root);
+	}
+	
+	public void preOrder(Node node)
+	{
+		if(node == null)
+		{
+			return;
+		}
+		
+		Stack<Node> stack = new Stack<>();
+		
+		Node current = node;
+		
+		while(current != null || !stack.isEmpty())
+		{
+			while(current != null)
+			{
+				System.out.println(current.data + " ");
+				
+				if(current.right != null)
+				{
+					stack.push(current.right);
+				}
+				
+				current = current.left;
+			}
+			
+			if(!stack.isEmpty())
+			{
+				current = stack.pop();
+			}
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		PreorderTraversal pt = new PreorderTraversal();
+		pt.root = new Node(10);
+		pt.root.left = new Node(20);
+		pt.root.right = new Node(30);
+		pt.root.left.left = new Node(40);
+		pt.root.left.left.left = new Node(70);
+		pt.root.left.right = new Node(50);
+		pt.root.right.left = new Node(60);
+		pt.root.left.left.right = new Node(80);
+		
+		pt.preOrder();
+	}
+
+}
