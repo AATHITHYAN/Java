@@ -1,0 +1,61 @@
+package Programs;
+
+public class PostorderTraversal 
+{
+	static class Node
+	{
+		int data;
+		Node left, right;
+		boolean visited;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			left = right = null;
+			visited = false;
+		}
+	}
+	
+	public void postOrder(Node head)
+	{
+		Node temp = head;
+		
+		while(temp != null && temp.visited == false)
+		{
+			if(temp.left != null && temp.left.visited == false)
+			{
+				temp = temp.left;
+			}
+			
+			else if(temp.right != null && temp.right.visited == false)
+			{
+				temp = temp.right;
+			}
+			
+			else
+			{
+				System.out.println(temp.data);
+				temp.visited = true;
+				temp = head;
+			}
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		PostorderTraversal pt = new PostorderTraversal();
+		
+		Node root = new Node(8);
+		root.left = new Node(3);
+		root.right = new Node(10);
+		root.left.left = new Node(1);
+		root.left.right = new Node(6);
+		root.left.right.left = new Node(4);
+		root.left.right.right = new Node(7);
+		root.right.right = new Node(14);
+		root.right.right.left = new Node(13);
+		
+		pt.postOrder(root);
+	}
+
+}
