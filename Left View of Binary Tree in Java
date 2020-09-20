@@ -1,0 +1,50 @@
+package Programs;
+
+public class LeftViewBinaryTree 
+{
+	Node root;
+	static int maximum = 0;
+	
+	static class Node
+	{
+		int data;
+		Node left, right;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			left = right = null;
+		}
+	}
+	
+	public void leftView(Node node, int level)
+	{
+		if(node == null)
+		{
+			return;
+		}
+		
+		if(maximum < level)
+		{
+			System.out.println(node.data + " ");
+			maximum = level;
+		}
+		
+		leftView(node.left, level + 1);
+		leftView(node.right, level + 1);
+	}
+	
+	public static void main(String[] args) 
+	{
+		LeftViewBinaryTree tree = new LeftViewBinaryTree();
+		
+		tree.root = new Node(12);
+		tree.root.left = new Node(10);
+		tree.root.right = new Node(30);
+		tree.root.right.left = new Node(25);
+		tree.root.right.right = new Node(40);
+		
+		tree.leftView(tree.root, 1);
+	}
+
+}
