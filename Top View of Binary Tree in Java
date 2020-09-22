@@ -1,0 +1,83 @@
+package Programs;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.TreeMap;
+
+class Node1
+{
+	Node1 left;
+	Node1 right;
+	int data;
+	int height;
+}
+
+class BinaryTree
+{
+	public Node1 createNewNode(int value)
+	{
+		Node1 newNode = new Node1();
+		newNode.data = value;
+		newNode.left = null;
+		newNode.right = null;
+		return newNode;
+	}
+	
+	public void topView(Node1 node)
+	{
+		if(node == null)
+		{
+			return;
+		}
+		
+		TreeMap<Integer, Integer> map = new TreeMap<>();
+		
+		Queue<Node1> queue = new LinkedList<>();
+		queue.add(node);
+		
+		while(!queue.isEmpty())
+		{
+			Node1 temp = queue.remove();
+			int hd = temp.height;
+			
+			if(map.get(hd) == null)
+			{
+				map.put(hd, temp.data);
+			}
+			
+			if(temp.left != null)
+			{
+				temp.left.height = hd - 1;
+				queue.add(temp.left);
+			}
+			
+			if(temp.right != null)
+			{
+				temp.right.height = hd + 1;
+				queue.add(temp.right);
+			}
+		}
+		
+		System.out.println(map.values());
+	}
+}
+
+public class TopViewOfBinaryTree 
+{
+	public static void main(String[] args) 
+	{
+		BinaryTree bt = new BinaryTree();
+		
+		Node1 root = bt.createNewNode(2);
+		root.left = bt.createNewNode(7);
+		root.right = bt.createNewNode(5);
+		root.left.right = bt.createNewNode(6);
+		root.left.right.left = bt.createNewNode(5);
+		root.left.right.left.left = bt.createNewNode(10);
+		root.left.right.right = bt.createNewNode(11);
+		root.right.right = bt.createNewNode(9);
+		
+		bt.topView(root);
+	}
+
+}
