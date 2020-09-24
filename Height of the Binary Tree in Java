@@ -1,0 +1,54 @@
+package Programs;
+
+public class HeightOfBinaryTree
+{
+	Node root;
+	
+	static class Node
+	{
+		int data;
+		Node left, right;
+		
+		public Node(int data)
+		{
+			this.data = data;
+			left = right = null;
+		}
+	}
+	
+	int heightBT(Node node)
+	{
+		if(node == null)
+		{
+			return 0;
+		}
+		else
+		{
+			int leftD = heightBT(node.left);
+			int rightD = heightBT(node.right);
+			
+			if(leftD > rightD)
+			{
+				return (leftD + 1);
+			}
+			else
+			{
+				return (rightD + 1);
+			}
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		HeightOfBinaryTree hobt = new HeightOfBinaryTree();
+		
+		hobt.root = new Node(1);
+		hobt.root.left = new Node(2);
+		hobt.root.right = new Node(3);
+		hobt.root.left.left = new Node(4);
+		hobt.root.left.right = new Node(5);
+		
+		System.out.println("Height : " + hobt.heightBT(hobt.root));
+	}
+
+}
