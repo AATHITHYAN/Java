@@ -1,0 +1,58 @@
+package Programs;
+
+public class DiameterOfBinaryTree 
+{
+	int diameter;
+	
+	static class Node3
+	{
+		int data;
+		Node3 left, right;
+		
+		public Node3(int data)
+		{
+			this.data = data;
+			left = right = null; 
+		}
+	}
+	
+	public int diameterBT(Node3 node)
+	{
+		if(node == null)
+		{
+			return 0;
+		}
+		
+		if(node.left == null && node.right == null)
+		{
+			return 1;
+		}
+		
+		int leftHeight = diameterBT(node.left);
+		int rightHeight = diameterBT(node.right);
+		
+		diameter = Math.max(diameter, leftHeight + rightHeight + 1);
+		
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
+	
+	public static void main(String[] args) 
+	{
+		DiameterOfBinaryTree dobt = new DiameterOfBinaryTree();
+		
+		Node3 root = new Node3(2);
+		root.left = new Node3(7);
+		root.right = new Node3(5);
+		root.left.left = new Node3(12);
+		root.left.left.left = new Node3(1);
+		root.left.left.left.right = new Node3(10);
+		root.left.right = new Node3(6);
+		root.left.right.left = new Node3(5);
+		root.left.right.right = new Node3(11);
+		root.left.right.right.right = new Node3(13);
+		
+		dobt.diameterBT(root);
+		System.out.println("Diameter : " + dobt.diameter);
+	}
+
+}
